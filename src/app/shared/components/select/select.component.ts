@@ -12,60 +12,7 @@ export interface SelectOption {
   standalone: true,
   imports: [CommonModule],
   templateUrl: './select.component.html',
-  styles: [`
-    .form-field {
-      margin-bottom: 1rem;
-    }
-
-    .form-label {
-      display: block;
-      margin-bottom: 0.5rem;
-      font-weight: 500;
-      color: #374151;
-    }
-
-    select {
-      width: 100%;
-      padding: 0.75rem;
-      border: 1px solid #d1d5db;
-      border-radius: 0.375rem;
-      font-size: 0.875rem;
-      background-color: white;
-      transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-      appearance: none;
-      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
-      background-position: right 0.5rem center;
-      background-repeat: no-repeat;
-      background-size: 1.5em 1.5em;
-      padding-right: 2.5rem;
-    }
-
-    select:focus {
-      outline: none;
-      border-color: #3b82f6;
-      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-    }
-
-    select:disabled {
-      background-color: #f9fafb;
-      cursor: not-allowed;
-      background-image: none;
-    }
-
-    select[multiple] {
-      height: auto;
-      min-height: 2.5rem;
-      background-image: none;
-      padding-right: 0.75rem;
-    }
-
-    .form-error {
-      display: block;
-      margin-top: 0.25rem;
-      color: #dc2626;
-      font-size: 0.75rem;
-    }
-  `],
+  styleUrls: ['./select.component.css'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
