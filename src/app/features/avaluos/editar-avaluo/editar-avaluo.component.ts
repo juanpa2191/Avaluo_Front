@@ -259,6 +259,23 @@ export class EditarAvaluoComponent implements OnInit {
     return '';
   }
 
+  // Función auxiliar para remover propiedades _id de objetos
+  private removeIds(obj: any): any {
+    if (obj === null || obj === undefined) return obj;
+    if (typeof obj !== 'object') return obj;
+    if (Array.isArray(obj)) {
+      return obj.map(item => this.removeIds(item));
+    }
+
+    const cleanedObj: any = {};
+    for (const key in obj) {
+      if (key !== '_id' && key !== 'property') {
+        cleanedObj[key] = this.removeIds(obj[key]);
+      }
+    }
+    return cleanedObj;
+  }
+
   onSubmit() {
     if (this.avaluoForm.valid && this.avaluoForm.dirty) {
       this.updating = true;
@@ -285,32 +302,32 @@ export class EditarAvaluoComponent implements OnInit {
             fichaInmobiliaria: formValue.fichaInmobiliaria,
             codigoCatastral: formValue.codigoCatastral
           },
-          propietarios: this.avaluo?.aspectosJuridicos.propietarios || [],
-          tipoInmueble: this.avaluo?.aspectosJuridicos.tipoInmueble || {
-            tipo: '',
-            regimen: '',
-            zona: ''
+          propietarios: this.removeIds(this.avaluo?.aspectosJuridicos.propietarios) || [],
+          tipoInmueble: {
+            tipo: formValue.tipoInmueble,
+            regimen: formValue.regimen,
+            zona: formValue.zona
           },
-          direccionYdestinacionEconomica: this.avaluo?.aspectosJuridicos.direccionYdestinacionEconomica || {
-            direccion: '',
-            destinacionEconomica: '',
-            imagen: '',
-            descripcion: ''
+          direccionYdestinacionEconomica: {
+            direccion: formValue.direccion,
+            destinacionEconomica: formValue.destinacionEconomica,
+            imagen: this.avaluo?.aspectosJuridicos.direccionYdestinacionEconomica?.imagen || '',
+            descripcion: formValue.descripcionDireccion
           },
-          certificadoTradicionLibertad: this.avaluo?.aspectosJuridicos.certificadoTradicionLibertad || {
+          certificadoTradicionLibertad: this.removeIds(this.avaluo?.aspectosJuridicos.certificadoTradicionLibertad) || {
             pin: '',
             fechaImpreso: '',
             horaImpresion: '',
             matriculaInmobiliaria: '',
             propietario: ''
           },
-          escrituraPublica: this.avaluo?.aspectosJuridicos.escrituraPublica || {
+          escrituraPublica: this.removeIds(this.avaluo?.aspectosJuridicos.escrituraPublica) || {
             numero: '',
             fecha: '',
             matriculaInmobiliaria: '',
             propietario: ''
           },
-          impuestoPredial: this.avaluo?.aspectosJuridicos.impuestoPredial || {
+          impuestoPredial: this.removeIds(this.avaluo?.aspectosJuridicos.impuestoPredial) || {
             periodoFacturado: '',
             fecha: '',
             matriculaFicha: '',
@@ -318,7 +335,7 @@ export class EditarAvaluoComponent implements OnInit {
             direccion: '',
             propietario: ''
           },
-          fachadas: this.avaluo?.aspectosJuridicos.fachadas || {
+          fachadas: this.removeIds(this.avaluo?.aspectosJuridicos.fachadas) || {
             frontal: '',
             posterior: '',
             lateralIzquierda: '',
@@ -336,10 +353,10 @@ export class EditarAvaluoComponent implements OnInit {
           observaciones: formValue.observaciones,
           estratoSocioeconomico: {
             descripcion: formValue.estratoSocioeconomico,
-            tablaEstratificacionNacional: this.avaluo?.caracteristicasGenerales.estratoSocioeconomico?.tablaEstratificacionNacional || []
+            tablaEstratificacionNacional: this.removeIds(this.avaluo?.caracteristicasGenerales.estratoSocioeconomico?.tablaEstratificacionNacional) || []
           },
           entorno: formValue.entorno,
-          viasPrincipales: this.avaluo?.caracteristicasGenerales.viasPrincipales || {
+          viasPrincipales: this.removeIds(this.avaluo?.caracteristicasGenerales.viasPrincipales) || {
             descripcion: '',
             acceso: {
               tipo: '',
@@ -348,7 +365,7 @@ export class EditarAvaluoComponent implements OnInit {
             imagen: [],
             vias: []
           },
-          transportePublico: this.avaluo?.caracteristicasGenerales.transportePublico || {
+          transportePublico: this.removeIds(this.avaluo?.caracteristicasGenerales.transportePublico) || {
             descripcion: '',
             tiposTransporte: {
               bus: '',
@@ -358,8 +375,8 @@ export class EditarAvaluoComponent implements OnInit {
             frecuenciaOperacion: '',
             imagenes: []
           },
-          serviciosPublicos: this.avaluo?.caracteristicasGenerales.serviciosPublicos || [],
-          infraestructuraEcologica: this.avaluo?.caracteristicasGenerales.infraestructuraEcologica || {
+          serviciosPublicos: this.removeIds(this.avaluo?.caracteristicasGenerales.serviciosPublicos) || [],
+          infraestructuraEcologica: this.removeIds(this.avaluo?.caracteristicasGenerales.infraestructuraEcologica) || {
             descripcion: '',
             coberturaVegetal: '',
             fauna: '',
@@ -368,7 +385,7 @@ export class EditarAvaluoComponent implements OnInit {
             conservacionManejo: '',
             imagenes: []
           },
-          viaAccesoPredio: this.avaluo?.caracteristicasGenerales.viaAccesoPredio || {
+          viaAccesoPredio: this.removeIds(this.avaluo?.caracteristicasGenerales.viaAccesoPredio) || {
             descripcion: '',
             observaciones: {
               viaAccesoPrincipal: '',
@@ -404,7 +421,7 @@ export class EditarAvaluoComponent implements OnInit {
           espacioPublicoEquipamientos: this.avaluo?.inspeccionFisica.espacioPublicoEquipamientos || '',
           areaMinimaLote: formValue.areaMinimaLote,
           amenazaMovimientoMasa: formValue.amenazaMovimientoMasa,
-          especificacionesConstructivas: this.avaluo?.inspeccionFisica.especificacionesConstructivas || {
+          especificacionesConstructivas: this.removeIds(this.avaluo?.inspeccionFisica.especificacionesConstructivas) || {
             especificacionConstructiva: [],
             observacion: '',
             acabados: [],
@@ -416,7 +433,7 @@ export class EditarAvaluoComponent implements OnInit {
           caracteristicasEspecificas: formValue.caracteristicasEspecificas,
           estadoConservacion: formValue.estadoConservacion
         },
-        imagenesInmueble: this.avaluo?.imagenesInmueble || []
+        imagenesInmueble: this.removeIds(this.avaluo?.imagenesInmueble) || []
       };
 
       this.avaluoService.updateAvaluo(this.avaluoId, avaluoData).subscribe({
