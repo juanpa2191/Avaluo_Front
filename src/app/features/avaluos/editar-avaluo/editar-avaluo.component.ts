@@ -7,11 +7,11 @@ import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { TabViewModule } from 'primeng/tabview';
 import { SidebarComponent } from '../../../shared/components/sidebar/sidebar.component';
-import { InputComponent } from '../../../shared/components/input/input.component';
-import { TextareaComponent } from '../../../shared/components/textarea/textarea.component';
-import { SelectComponent, SelectOption } from '../../../shared/components/select/select.component';
-import { MultiSelectComponent } from '../../../shared/components/multi-select/multi-select.component';
-import { ButtonComponent } from '../../../shared/components/button/button.component';
+import { InformacionGeneralComponent } from '../components/informacion-general/informacion-general.component';
+import { AspectosJuridicosComponent } from '../components/aspectos-juridicos/aspectos-juridicos.component';
+import { CaracteristicasGeneralesComponent } from '../components/caracteristicas-generales/caracteristicas-generales.component';
+import { InspeccionFisicaComponent } from '../components/inspeccion-fisica/inspeccion-fisica.component';
+import { SelectOption } from '../../../shared/components/select/select.component';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -24,11 +24,10 @@ import { CommonModule } from '@angular/common';
     CardModule,
     TabViewModule,
     SidebarComponent,
-    InputComponent,
-    TextareaComponent,
-    SelectComponent,
-    MultiSelectComponent,
-    ButtonComponent
+    InformacionGeneralComponent,
+    AspectosJuridicosComponent,
+    CaracteristicasGeneralesComponent,
+    InspeccionFisicaComponent
   ],
   templateUrl: './editar-avaluo.component.html',
   styleUrls: ['./editar-avaluo.component.css']
@@ -37,6 +36,7 @@ export class EditarAvaluoComponent implements OnInit {
   avaluoForm: FormGroup;
   loading = true;
   updating = false;
+  activeTab = 0;
   avaluoId: string = '';
   avaluo: Avaluo | null = null;
 
@@ -450,5 +450,21 @@ export class EditarAvaluoComponent implements OnInit {
 
   volver() {
     this.router.navigate(['/avaluos']);
+  }
+
+  onTabChange(index: number) {
+    this.activeTab = index;
+  }
+
+  onNext() {
+    if (this.activeTab < 3) {
+      this.activeTab++;
+    }
+  }
+
+  onPrevious() {
+    if (this.activeTab > 0) {
+      this.activeTab--;
+    }
   }
 }
