@@ -63,7 +63,12 @@ export class UsuariosComponent implements OnInit {
   }
 
   editarUsuario(usuario: Usuario) {
-    this.router.navigate(['/usuarios/editar', usuario.id]);
+    const userId = usuario.id || (usuario as any)._id;
+    if (usuario && userId) {
+      this.router.navigate(['/usuarios/editar', userId]);
+    } else {
+      console.error('Usuario o ID no válido:', usuario);
+    }
   }
 
   confirmarEliminarUsuario(usuario: Usuario) {
@@ -74,9 +79,10 @@ export class UsuariosComponent implements OnInit {
   eliminarUsuario() {
     if (this.usuarioToDelete) {
       this.deleting = true;
-      this.usuarioService.deleteUsuario(this.usuarioToDelete.id!).subscribe({
+      const userId = this.usuarioToDelete.id || (this.usuarioToDelete as any)._id;
+      this.usuarioService.deleteUsuario(userId).subscribe({
         next: () => {
-          this.usuarios = this.usuarios.filter(u => u.id !== this.usuarioToDelete!.id);
+          this.usuarios = this.usuarios.filter(u => (u.id || (u as any)._id) !== userId);
           this.showConfirmDialog = false;
           this.usuarioToDelete = null;
           this.deleting = false;
