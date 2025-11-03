@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../core/application/services/auth.service';
 import { ButtonModule } from 'primeng/button';
 import { SidebarComponent } from '../../shared/components/sidebar/sidebar.component';
+import { ButtonComponent } from '../../shared/components/button/button.component';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -11,7 +12,8 @@ import { CommonModule } from '@angular/common';
   imports: [
     CommonModule,
     ButtonModule,
-    SidebarComponent
+    SidebarComponent,
+    ButtonComponent
   ],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
@@ -27,8 +29,7 @@ export class DashboardComponent {
   }
 
   logout() {
-    this.authService.logout().subscribe(() => {
-      this.router.navigate(['/']);
-    });
+    this.authService.logout();
+    this.router.navigate(['/']);
   }
 }

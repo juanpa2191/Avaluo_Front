@@ -4,9 +4,9 @@ import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../../core/application/services/auth.service';
 import { LoginDto } from '../../../core/domain/entities/auth.entity';
 import { ButtonModule } from 'primeng/button';
-import { InputTextModule } from 'primeng/inputtext';
-import { PasswordModule } from 'primeng/password';
 import { CardModule } from 'primeng/card';
+import { InputComponent } from '../../../shared/components/input/input.component';
+import { ButtonComponent } from '../../../shared/components/button/button.component';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -17,9 +17,9 @@ import { CommonModule } from '@angular/common';
     ReactiveFormsModule,
     RouterModule,
     ButtonModule,
-    InputTextModule,
-    PasswordModule,
-    CardModule
+    CardModule,
+    InputComponent,
+    ButtonComponent
   ],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
@@ -38,6 +38,21 @@ export class LoginComponent {
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]]
     });
+  }
+
+  getErrorMessage(fieldName: string): string {
+    const field = this.loginForm.get(fieldName);
+    if (field?.hasError('required')) {
+      return 'Este campo es requerido';
+    }
+    if (field?.hasError('email')) {
+      return 'Ingrese un email válido';
+    }
+    if (field?.hasError('minlength')) {
+      const minLength = field.errors?.['minlength']?.requiredLength;
+      return `Mínimo ${minLength} caracteres`;
+    }
+    return '';
   }
 
   onSubmit() {

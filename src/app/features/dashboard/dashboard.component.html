@@ -6,12 +6,13 @@
       <h1>Dashboard</h1>
       <div class="user-info">
         <span>Bienvenido, {{ currentUser?.nombre }}</span>
-        <p-button
-          label="Cerrar Sesión"
+        <app-button
+          variant="danger"
           icon="pi pi-sign-out"
           (onClick)="logout()"
-          styleClass="p-button-outlined p-button-danger"
-        ></p-button>
+        >
+          Cerrar Sesión
+        </app-button>
       </div>
     </header>
 

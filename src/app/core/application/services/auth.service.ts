@@ -14,8 +14,13 @@ export class AuthService {
   constructor(private authRepository: AuthHttpService) {
     const token = localStorage.getItem('token');
     const user = localStorage.getItem('user');
-    if (token && user) {
-      this.currentUserSubject.next(JSON.parse(user));
+    if (token && user && user !== 'undefined') {
+      try {
+        this.currentUserSubject.next(JSON.parse(user));
+      } catch (error) {
+        console.error('Error parsing user data from localStorage:', error);
+        localStorage.removeItem('user');
+      }
     }
   }
 
@@ -39,14 +44,17 @@ export class AuthService {
     );
   }
 
-  logout(): Observable<void> {
-    return this.authRepository.logout().pipe(
-      tap(() => {
-        localStorage.removeItem('token');
-        localStorage.removeItem('user');
-        this.currentUserSubject.next(null);
-      })
-    );
+  logout(): void {
+    // Logout inmediato sin depender del backend
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    this.currentUserSubject.next(null);
+
+    // Opcional: intentar notificar al backend en background
+    this.authRepository.logout().subscribe({
+      next: () => console.log('Logout backend successful'),
+      error: (error) => console.warn('Backend logout failed:', error)
+    });
   }
 
   getToken(): string | null {
