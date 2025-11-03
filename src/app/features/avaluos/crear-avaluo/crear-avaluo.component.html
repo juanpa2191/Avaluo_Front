@@ -1,0 +1,258 @@
+<div class="avaluos-container">
+  <app-sidebar></app-sidebar>
+
+  <div class="main-content">
+    <header class="page-header">
+      <h1>Crear Nuevo Avaluo</h1>
+      <app-button
+        variant="secondary"
+        icon="pi pi-arrow-left"
+        (onClick)="volver()"
+      >
+        Volver
+      </app-button>
+    </header>
+
+    <div class="content">
+      <p-card header="Información del Avaluo">
+        <form [formGroup]="avaluoForm" (ngSubmit)="onSubmit()">
+          <p-tabView>
+            <!-- Información General -->
+            <p-tabPanel header="Información General">
+              <div class="form-grid">
+                <app-input
+                  label="Fecha de Entrega"
+                  type="date"
+                  formControlName="fechaEntrega"
+                  [error]="getErrorMessage('informacionGeneral.fechaEntrega')"
+                ></app-input>
+
+                <app-input
+                  label="Fecha de Visita"
+                  type="date"
+                  formControlName="fechaVisita"
+                  [error]="getErrorMessage('informacionGeneral.fechaVisita')"
+                ></app-input>
+
+                <app-input
+                  label="Vigencia del Avaluo"
+                  formControlName="vigenciaAvaluo"
+                  placeholder="Ej: 1 año"
+                  [error]="getErrorMessage('informacionGeneral.vigenciaAvaluo')"
+                ></app-input>
+
+                <app-input
+                  label="Solicitante"
+                  formControlName="solicitante"
+                  placeholder="Nombre del solicitante"
+                  [error]="getErrorMessage('informacionGeneral.solicitante')"
+                ></app-input>
+
+                <app-select
+                  label="Departamento"
+                  formControlName="departamento"
+                  placeholder="Seleccionar departamento"
+                  [options]="departamentosOptions"
+                  [error]="getErrorMessage('informacionGeneral.departamento')"
+                ></app-select>
+
+                <app-input
+                  label="Municipio"
+                  formControlName="municipio"
+                  placeholder="Nombre del municipio"
+                  [error]="getErrorMessage('informacionGeneral.municipio')"
+                ></app-input>
+
+                <app-input
+                  label="Barrio/Vereda"
+                  formControlName="barrioVereda"
+                  placeholder="Nombre del barrio o vereda"
+                  [error]="getErrorMessage('informacionGeneral.barrioVereda')"
+                ></app-input>
+
+                <app-select
+                  label="Objeto del Avaluo"
+                  formControlName="objetoAvaluo"
+                  placeholder="Seleccionar tipo"
+                  [options]="objetoAvaluoOptions"
+                  [error]="getErrorMessage('informacionGeneral.objetoAvaluo')"
+                ></app-select>
+
+                <app-select
+                  label="Destino del Avaluo"
+                  formControlName="destinoAvaluo"
+                  placeholder="Seleccionar destino"
+                  [options]="destinoAvaluoOptions"
+                  [error]="getErrorMessage('informacionGeneral.destinoAvaluo')"
+                ></app-select>
+
+                <app-multi-select
+                  label="Responsabilidades del Avaluador"
+                  formControlName="responsabilidadesAvaluador"
+                  placeholder="Seleccionar responsabilidades"
+                  [options]="responsabilidadesOptions"
+                  [error]="getErrorMessage('informacionGeneral.responsabilidadesAvaluador')"
+                ></app-multi-select>
+              </div>
+            </p-tabPanel>
+
+            <!-- Aspectos Jurídicos -->
+            <p-tabPanel header="Aspectos Jurídicos">
+              <div class="form-grid">
+                <app-input
+                  label="Escritura Pública"
+                  formControlName="escrituraPublica"
+                  placeholder="Detalles de la escritura"
+                  [error]="getErrorMessage('aspectosJuridicos.inmuebleObjetoAvaluo.escrituraPublica')"
+                ></app-input>
+
+                <app-select
+                  label="Modo de Adquisición"
+                  formControlName="modoAdquisicion"
+                  placeholder="Seleccionar modo"
+                  [options]="modoAdquisicionOptions"
+                  [error]="getErrorMessage('aspectosJuridicos.inmuebleObjetoAvaluo.modoAdquisicion')"
+                ></app-select>
+
+                <app-input
+                  label="Matrícula Inmobiliaria"
+                  formControlName="matriculaInmobiliaria"
+                  placeholder="Número de matrícula"
+                  [error]="getErrorMessage('aspectosJuridicos.inmuebleObjetoAvaluo.matriculaInmobiliaria')"
+                ></app-input>
+
+                <app-input
+                  label="Ficha Inmobiliaria"
+                  formControlName="fichaInmobiliaria"
+                  placeholder="Número de ficha"
+                  [error]="getErrorMessage('aspectosJuridicos.inmuebleObjetoAvaluo.fichaInmobiliaria')"
+                ></app-input>
+
+                <app-input
+                  label="Código Catastral"
+                  formControlName="codigoCatastral"
+                  placeholder="Código catastral"
+                  [error]="getErrorMessage('aspectosJuridicos.inmuebleObjetoAvaluo.codigoCatastral')"
+                ></app-input>
+              </div>
+            </p-tabPanel>
+
+            <!-- Características Generales -->
+            <p-tabPanel header="Características Generales">
+              <div class="form-grid">
+                <app-select
+                  label="Forma del Terreno"
+                  formControlName="formaTerreno"
+                  placeholder="Seleccionar forma"
+                  [options]="formaTerrenoOptions"
+                  [error]="getErrorMessage('caracteristicasGenerales.formaGeometricaYdimensionDelPredio.formaTerreno')"
+                ></app-select>
+
+                <app-input
+                  label="Ancho del Terreno (m)"
+                  type="number"
+                  formControlName="anchoTerreno"
+                  placeholder="0.00"
+                  [error]="getErrorMessage('caracteristicasGenerales.formaGeometricaYdimensionDelPredio.anchoTerreno')"
+                ></app-input>
+
+                <app-input
+                  label="Largo del Terreno (m)"
+                  type="number"
+                  formControlName="largoTerreno"
+                  placeholder="0.00"
+                  [error]="getErrorMessage('caracteristicasGenerales.formaGeometricaYdimensionDelPredio.largoTerreno')"
+                ></app-input>
+
+                <app-input
+                  label="Área del Terreno (m²)"
+                  type="number"
+                  formControlName="areaTerreno"
+                  placeholder="0.00"
+                  [error]="getErrorMessage('caracteristicasGenerales.formaGeometricaYdimensionDelPredio.areaTerreno')"
+                ></app-input>
+
+                <app-textarea
+                  label="Descripción de Condiciones del Sector"
+                  formControlName="descripcionCondicionesSector"
+                  placeholder="Describa las condiciones del sector"
+                  [rows]="3"
+                  [error]="getErrorMessage('caracteristicasGenerales.descripcionCondicionesSector')"
+                ></app-textarea>
+
+                <app-textarea
+                  label="Observaciones"
+                  formControlName="observaciones"
+                  placeholder="Observaciones adicionales"
+                  [rows]="3"
+                  [error]="getErrorMessage('caracteristicasGenerales.observaciones')"
+                ></app-textarea>
+              </div>
+            </p-tabPanel>
+
+            <!-- Inspección Física -->
+            <p-tabPanel header="Inspección Física">
+              <div class="form-grid">
+                <app-input
+                  label="Esquema Normativo"
+                  formControlName="esquemaNormativo"
+                  placeholder="Ej: Plan de Ordenamiento Territorial"
+                  [error]="getErrorMessage('inspeccionFisica.esquemaNormativo')"
+                ></app-input>
+
+                <app-input
+                  label="Zona/Barrio"
+                  formControlName="zonaBarrio"
+                  placeholder="Nombre de la zona o barrio"
+                  [error]="getErrorMessage('inspeccionFisica.zonaBarrio')"
+                ></app-input>
+
+                <app-select
+                  label="Clasificación del Suelo"
+                  formControlName="clasificacionSuelo"
+                  placeholder="Seleccionar clasificación"
+                  [options]="clasificacionSueloOptions"
+                  [error]="getErrorMessage('inspeccionFisica.clasificacionSuelo')"
+                ></app-select>
+
+                <app-select
+                  label="Categoría de Uso"
+                  formControlName="categoriaUso"
+                  placeholder="Seleccionar categoría"
+                  [options]="categoriaUsoOptions"
+                  [error]="getErrorMessage('inspeccionFisica.categoriaUso')"
+                ></app-select>
+
+                <app-input
+                  label="Altura Máxima"
+                  formControlName="alturaMaxima"
+                  placeholder="Ej: 20 pisos"
+                  [error]="getErrorMessage('inspeccionFisica.alturaMaxima')"
+                ></app-input>
+              </div>
+            </p-tabPanel>
+          </p-tabView>
+
+          <div class="form-actions">
+            <app-button
+              variant="secondary"
+              icon="pi pi-times"
+              (onClick)="volver()"
+            >
+              Cancelar
+            </app-button>
+            <app-button
+              type="submit"
+              variant="primary"
+              icon="pi pi-check"
+              [loading]="loading"
+              [disabled]="avaluoForm.invalid"
+            >
+              Crear Avaluo
+            </app-button>
+          </div>
+        </form>
+      </p-card>
+    </div>
+  </div>
+</div>

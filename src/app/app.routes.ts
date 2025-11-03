@@ -40,6 +40,21 @@ export const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
+    path: 'avaluos/crear',
+    loadComponent: () => import('./features/avaluos/crear-avaluo/crear-avaluo.component').then(m => m.CrearAvaluoComponent),
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'avaluos/ver/:id',
+    loadComponent: () => import('./features/avaluos/ver-avaluo/ver-avaluo.component').then(m => m.VerAvaluoComponent),
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'avaluos/editar/:id',
+    loadComponent: () => import('./features/avaluos/editar-avaluo/editar-avaluo.component').then(m => m.EditarAvaluoComponent),
+    canActivate: [AuthGuard]
+  },
+  {
     path: '**',
     redirectTo: ''
   }

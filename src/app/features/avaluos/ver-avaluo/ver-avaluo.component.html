@@ -1,0 +1,172 @@
+<div class="avaluos-container">
+  <app-sidebar></app-sidebar>
+
+  <div class="main-content">
+    <header class="page-header">
+      <h1>Detalles del Avaluo</h1>
+      <div class="header-actions">
+        <app-button
+          variant="success"
+          icon="pi pi-pencil"
+          (onClick)="editarAvaluo()"
+        >
+          Editar
+        </app-button>
+        <app-button
+          variant="secondary"
+          icon="pi pi-arrow-left"
+          (onClick)="volver()"
+        >
+          Volver
+        </app-button>
+      </div>
+    </header>
+
+    <div class="content" *ngIf="!loading && avaluo">
+      <p-tabView>
+        <!-- Información General -->
+        <p-tabPanel header="Información General">
+          <div class="info-grid">
+            <div class="info-item">
+              <label>Fecha de Entrega:</label>
+              <span>{{ avaluo.informacionGeneral.fechaEntrega }}</span>
+            </div>
+            <div class="info-item">
+              <label>Fecha de Visita:</label>
+              <span>{{ avaluo.informacionGeneral.fechaVisita }}</span>
+            </div>
+            <div class="info-item">
+              <label>Vigencia del Avaluo:</label>
+              <span>{{ avaluo.informacionGeneral.vigenciaAvaluo }}</span>
+            </div>
+            <div class="info-item">
+              <label>Solicitante:</label>
+              <span>{{ avaluo.informacionGeneral.solicitante }}</span>
+            </div>
+            <div class="info-item">
+              <label>Departamento:</label>
+              <span>{{ avaluo.informacionGeneral.departamento }}</span>
+            </div>
+            <div class="info-item">
+              <label>Municipio:</label>
+              <span>{{ avaluo.informacionGeneral.municipio }}</span>
+            </div>
+            <div class="info-item">
+              <label>Barrio/Vereda:</label>
+              <span>{{ avaluo.informacionGeneral.barrioVereda }}</span>
+            </div>
+            <div class="info-item">
+              <label>Objeto del Avaluo:</label>
+              <span>{{ avaluo.informacionGeneral.objetoAvaluo }}</span>
+            </div>
+            <div class="info-item">
+              <label>Destino del Avaluo:</label>
+              <span>{{ avaluo.informacionGeneral.destinoAvaluo }}</span>
+            </div>
+            <div class="info-item">
+              <label>Responsabilidades del Avaluador:</label>
+              <div class="responsabilidades-list">
+                <span *ngFor="let resp of avaluo.informacionGeneral.responsabilidadesAvaluador" class="responsabilidad-tag">
+                  {{ resp }}
+                </span>
+              </div>
+            </div>
+          </div>
+        </p-tabPanel>
+
+        <!-- Aspectos Jurídicos -->
+        <p-tabPanel header="Aspectos Jurídicos">
+          <div class="info-grid">
+            <div class="info-item">
+              <label>Escritura Pública:</label>
+              <span>{{ avaluo.aspectosJuridicos.inmuebleObjetoAvaluo.escrituraPublica }}</span>
+            </div>
+            <div class="info-item">
+              <label>Modo de Adquisición:</label>
+              <span>{{ avaluo.aspectosJuridicos.inmuebleObjetoAvaluo.modoAdquisicion }}</span>
+            </div>
+            <div class="info-item">
+              <label>Matrícula Inmobiliaria:</label>
+              <span>{{ avaluo.aspectosJuridicos.inmuebleObjetoAvaluo.matriculaInmobiliaria }}</span>
+            </div>
+            <div class="info-item">
+              <label>Ficha Inmobiliaria:</label>
+              <span>{{ avaluo.aspectosJuridicos.inmuebleObjetoAvaluo.fichaInmobiliaria }}</span>
+            </div>
+            <div class="info-item">
+              <label>Código Catastral:</label>
+              <span>{{ avaluo.aspectosJuridicos.inmuebleObjetoAvaluo.codigoCatastral }}</span>
+            </div>
+          </div>
+        </p-tabPanel>
+
+        <!-- Características Generales -->
+        <p-tabPanel header="Características Generales">
+          <div class="info-grid">
+            <div class="info-item">
+              <label>Forma del Terreno:</label>
+              <span>{{ avaluo.caracteristicasGenerales.formaGeometricaYdimensionDelPredio.formaTerreno }}</span>
+            </div>
+            <div class="info-item">
+              <label>Ancho del Terreno:</label>
+              <span>{{ avaluo.caracteristicasGenerales.formaGeometricaYdimensionDelPredio.anchoTerreno }} m</span>
+            </div>
+            <div class="info-item">
+              <label>Largo del Terreno:</label>
+              <span>{{ avaluo.caracteristicasGenerales.formaGeometricaYdimensionDelPredio.largoTerreno }} m</span>
+            </div>
+            <div class="info-item">
+              <label>Área del Terreno:</label>
+              <span>{{ avaluo.caracteristicasGenerales.formaGeometricaYdimensionDelPredio.areaTerreno }} m²</span>
+            </div>
+            <div class="info-item full-width">
+              <label>Descripción de Condiciones del Sector:</label>
+              <span>{{ avaluo.caracteristicasGenerales.descripcionCondicionesSector }}</span>
+            </div>
+            <div class="info-item full-width" *ngIf="avaluo.caracteristicasGenerales.observaciones">
+              <label>Observaciones:</label>
+              <span>{{ avaluo.caracteristicasGenerales.observaciones }}</span>
+            </div>
+          </div>
+        </p-tabPanel>
+
+        <!-- Inspección Física -->
+        <p-tabPanel header="Inspección Física">
+          <div class="info-grid">
+            <div class="info-item">
+              <label>Esquema Normativo:</label>
+              <span>{{ avaluo.inspeccionFisica.esquemaNormativo }}</span>
+            </div>
+            <div class="info-item">
+              <label>Zona/Barrio:</label>
+              <span>{{ avaluo.inspeccionFisica.zonaBarrio }}</span>
+            </div>
+            <div class="info-item">
+              <label>Clasificación del Suelo:</label>
+              <span>{{ avaluo.inspeccionFisica.clasificacionSuelo }}</span>
+            </div>
+            <div class="info-item">
+              <label>Categoría de Uso:</label>
+              <span>{{ avaluo.inspeccionFisica.categoriaUso }}</span>
+            </div>
+            <div class="info-item">
+              <label>Altura Máxima:</label>
+              <span>{{ avaluo.inspeccionFisica.alturaMaxima }}</span>
+            </div>
+          </div>
+        </p-tabPanel>
+      </p-tabView>
+    </div>
+
+    <div *ngIf="loading" class="loading-container">
+      <p>Cargando detalles del avaluo...</p>
+    </div>
+
+    <div *ngIf="!loading && !avaluo" class="error-container">
+      <p>No se encontró el avaluo solicitado.</p>
+      <app-button variant="secondary" (onClick)="volver()">
+        Volver a la lista
+      </app-button>
+    </div>
+  </div>
+</div>

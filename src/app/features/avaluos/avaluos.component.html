@@ -4,11 +4,13 @@
   <div class="main-content">
     <header class="page-header">
       <h1>Gestión de Avaluos</h1>
-      <p-button
-        label="Nuevo Avaluo"
+      <app-button
+        variant="primary"
         icon="pi pi-plus"
-        styleClass="p-button-primary"
-      ></p-button>
+        (onClick)="crearAvaluo()"
+      >
+        Nuevo Avaluo
+      </app-button>
     </header>
 
     <div class="content">
@@ -44,11 +46,13 @@
                 icon="pi pi-eye"
                 styleClass="p-button-rounded p-button-info p-mr-2"
                 pTooltip="Ver Detalles"
+                (onClick)="verAvaluo(avaluo)"
               ></p-button>
               <p-button
                 icon="pi pi-pencil"
                 styleClass="p-button-rounded p-button-success p-mr-2"
                 pTooltip="Editar"
+                (onClick)="editarAvaluo(avaluo)"
               ></p-button>
               <p-button
                 icon="pi pi-trash"
