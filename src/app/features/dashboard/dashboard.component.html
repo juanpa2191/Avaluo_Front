@@ -1,0 +1,73 @@
+<div class="dashboard-container">
+  <app-sidebar></app-sidebar>
+
+  <div class="main-content">
+    <header class="dashboard-header">
+      <h1>Dashboard</h1>
+      <div class="user-info">
+        <span>Bienvenido, {{ currentUser?.nombre }}</span>
+        <p-button
+          label="Cerrar Sesión"
+          icon="pi pi-sign-out"
+          (onClick)="logout()"
+          styleClass="p-button-outlined p-button-danger"
+        ></p-button>
+      </div>
+    </header>
+
+    <div class="dashboard-content">
+      <div class="stats-cards">
+        <div class="stat-card">
+          <div class="stat-icon">👥</div>
+          <div class="stat-info">
+            <h3>Usuarios</h3>
+            <p>Total de usuarios registrados</p>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon">🏠</div>
+          <div class="stat-info">
+            <h3>Avaluos</h3>
+            <p>Total de avaluos realizados</p>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon">📊</div>
+          <div class="stat-info">
+            <h3>Reportes</h3>
+            <p>Reportes generados</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="recent-activity">
+        <h2>Actividad Reciente</h2>
+        <div class="activity-list">
+          <div class="activity-item">
+            <div class="activity-icon">🔐</div>
+            <div class="activity-content">
+              <p>Usuario inició sesión</p>
+              <small>Hace 5 minutos</small>
+            </div>
+          </div>
+          <div class="activity-item">
+            <div class="activity-icon">📝</div>
+            <div class="activity-content">
+              <p>Nuevo avaluo creado</p>
+              <small>Hace 15 minutos</small>
+            </div>
+          </div>
+          <div class="activity-item">
+            <div class="activity-icon">👤</div>
+            <div class="activity-content">
+              <p>Usuario registrado</p>
+              <small>Hace 1 hora</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

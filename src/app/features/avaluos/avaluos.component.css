@@ -1,0 +1,43 @@
+.avaluos-container {
+  display: flex;
+  min-height: 100vh;
+  background: #f5f5f5;
+}
+
+.main-content {
+  flex: 1;
+  margin-left: 250px;
+  transition: margin-left 0.3s ease;
+}
+
+.page-header {
+  background: white;
+  padding: 20px 30px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.page-header h1 {
+  margin: 0;
+  color: #333;
+  font-weight: 600;
+}
+
+.content {
+  padding: 30px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .main-content {
+    margin-left: 0;
+  }
+
+  .page-header {
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+  }
+}

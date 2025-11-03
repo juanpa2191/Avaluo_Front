@@ -1,0 +1,64 @@
+<div class="avaluos-container">
+  <app-sidebar></app-sidebar>
+
+  <div class="main-content">
+    <header class="page-header">
+      <h1>Gestión de Avaluos</h1>
+      <p-button
+        label="Nuevo Avaluo"
+        icon="pi pi-plus"
+        styleClass="p-button-primary"
+      ></p-button>
+    </header>
+
+    <div class="content">
+      <p-table
+        [value]="avaluos"
+        [loading]="loading"
+        [paginator]="true"
+        [rows]="10"
+        [showCurrentPageReport]="true"
+        currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} avaluos"
+        [rowsPerPageOptions]="[5, 10, 25]"
+        responsiveLayout="scroll"
+      >
+        <ng-template pTemplate="header">
+          <tr>
+            <th>ID</th>
+            <th>Solicitante</th>
+            <th>Objeto Avaluo</th>
+            <th>Fecha Entrega</th>
+            <th>Fecha Visita</th>
+            <th>Acciones</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-avaluo>
+          <tr>
+            <td>{{ avaluo.id }}</td>
+            <td>{{ avaluo.informacionGeneral.solicitante }}</td>
+            <td>{{ avaluo.informacionGeneral.objetoAvaluo }}</td>
+            <td>{{ avaluo.informacionGeneral.fechaEntrega }}</td>
+            <td>{{ avaluo.informacionGeneral.fechaVisita }}</td>
+            <td>
+              <p-button
+                icon="pi pi-eye"
+                styleClass="p-button-rounded p-button-info p-mr-2"
+                pTooltip="Ver Detalles"
+              ></p-button>
+              <p-button
+                icon="pi pi-pencil"
+                styleClass="p-button-rounded p-button-success p-mr-2"
+                pTooltip="Editar"
+              ></p-button>
+              <p-button
+                icon="pi pi-trash"
+                styleClass="p-button-rounded p-button-danger"
+                pTooltip="Eliminar"
+              ></p-button>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+</div>

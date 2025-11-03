@@ -1,0 +1,61 @@
+<div class="usuarios-container">
+  <app-sidebar></app-sidebar>
+
+  <div class="main-content">
+    <header class="page-header">
+      <h1>Gestión de Usuarios</h1>
+      <p-button
+        label="Nuevo Usuario"
+        icon="pi pi-plus"
+        styleClass="p-button-primary"
+      ></p-button>
+    </header>
+
+    <div class="content">
+      <p-table
+        [value]="usuarios"
+        [loading]="loading"
+        [paginator]="true"
+        [rows]="10"
+        [showCurrentPageReport]="true"
+        currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} usuarios"
+        [rowsPerPageOptions]="[5, 10, 25]"
+        responsiveLayout="scroll"
+      >
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Nombre</th>
+            <th>Email</th>
+            <th>Roles</th>
+            <th>Fecha de Creación</th>
+            <th>Acciones</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-usuario>
+          <tr>
+            <td>{{ usuario.nombre }}</td>
+            <td>{{ usuario.email }}</td>
+            <td>
+              <span *ngFor="let rol of usuario.roles" class="role-badge">
+                {{ rol }}
+              </span>
+            </td>
+            <td>{{ usuario.createdAt | date:'dd/MM/yyyy' }}</td>
+            <td>
+              <p-button
+                icon="pi pi-pencil"
+                styleClass="p-button-rounded p-button-success p-mr-2"
+                pTooltip="Editar"
+              ></p-button>
+              <p-button
+                icon="pi pi-trash"
+                styleClass="p-button-rounded p-button-danger"
+                pTooltip="Eliminar"
+              ></p-button>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+</div>

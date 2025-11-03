@@ -1,0 +1,16 @@
+<div class="sidebar">
+  <div class="sidebar-header">
+    <h2>Avaluos</h2>
+  </div>
+
+  <nav class="sidebar-nav">
+    <ul>
+      <li *ngFor="let item of menuItems" [class.active]="isActive(item.routerLink)">
+        <a [routerLink]="item.routerLink" class="nav-link">
+          <i [class]="item.icon" class="nav-icon"></i>
+          <span>{{ item.label }}</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>
