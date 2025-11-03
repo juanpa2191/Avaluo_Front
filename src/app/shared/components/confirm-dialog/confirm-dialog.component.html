@@ -1,0 +1,29 @@
+<p-dialog
+  [(visible)]="visible"
+  [modal]="true"
+  [closable]="false"
+  [style]="{width: '400px'}"
+  header="Confirmar Acción"
+>
+  <div class="confirm-content">
+    <i class="pi pi-exclamation-triangle warning-icon"></i>
+    <p class="confirm-message">{{ message }}</p>
+    <p class="confirm-detail" *ngIf="detail">{{ detail }}</p>
+  </div>
+
+  <ng-template pTemplate="footer">
+    <p-button
+      label="Cancelar"
+      icon="pi pi-times"
+      styleClass="p-button-secondary p-mr-2"
+      (onClick)="onCancel()"
+    ></p-button>
+    <p-button
+      [label]="confirmLabel"
+      [icon]="confirmIcon"
+      styleClass="p-button-danger"
+      (onClick)="onConfirm()"
+      [loading]="loading"
+    ></p-button>
+  </ng-template>
+</p-dialog>

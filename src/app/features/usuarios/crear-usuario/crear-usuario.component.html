@@ -1,0 +1,75 @@
+<div class="usuarios-container">
+  <app-sidebar></app-sidebar>
+
+  <div class="main-content">
+    <header class="page-header">
+      <h1>Crear Nuevo Usuario</h1>
+      <app-button
+        variant="secondary"
+        icon="pi pi-arrow-left"
+        (onClick)="volver()"
+      >
+        Volver
+      </app-button>
+    </header>
+
+    <div class="content">
+      <p-card header="Información del Usuario">
+        <form [formGroup]="usuarioForm" (ngSubmit)="onSubmit()">
+          <div class="form-grid">
+            <app-input
+              label="Nombre"
+              formControlName="nombre"
+              placeholder="Ingrese el nombre completo"
+              [error]="getErrorMessage('nombre')"
+            ></app-input>
+
+            <app-input
+              label="Email"
+              type="email"
+              formControlName="email"
+              placeholder="usuario@ejemplo.com"
+              [error]="getErrorMessage('email')"
+            ></app-input>
+
+            <app-input
+              label="Contraseña"
+              type="password"
+              formControlName="password"
+              placeholder="Mínimo 6 caracteres"
+              [error]="getErrorMessage('password')"
+            ></app-input>
+
+            <app-multi-select
+              label="Roles"
+              formControlName="roles"
+              placeholder="Seleccionar roles"
+              [options]="roleOptions"
+              [error]="getErrorMessage('roles')"
+            ></app-multi-select>
+          </div>
+
+          <div class="form-actions">
+            <app-button
+              variant="secondary"
+              icon="pi pi-times"
+              class="mr-2"
+              (onClick)="volver()"
+            >
+              Cancelar
+            </app-button>
+            <app-button
+              variant="primary"
+              icon="pi pi-check"
+              type="submit"
+              [loading]="loading"
+              [disabled]="usuarioForm.invalid"
+            >
+              Crear Usuario
+            </app-button>
+          </div>
+        </form>
+      </p-card>
+    </div>
+  </div>
+</div>

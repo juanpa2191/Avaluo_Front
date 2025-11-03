@@ -1,0 +1,22 @@
+<div class="form-field">
+  <label *ngIf="label" [for]="multiSelectId" class="form-label">{{ label }}</label>
+  <div class="multi-select-container">
+    <div class="selected-items">
+      <span *ngFor="let item of selectedItems; let i = index" class="selected-item">
+        {{ getOptionLabel(item) }}
+        <button type="button" (click)="removeItem(i)" class="remove-btn">&times;</button>
+      </span>
+    </div>
+    <select
+      [id]="multiSelectId"
+      [class]="selectClass"
+      (change)="onSelectionChange($event)"
+    >
+      <option value="" disabled selected>{{ placeholder || 'Seleccionar...' }}</option>
+      <option *ngFor="let option of availableOptions" [value]="option.value">
+        {{ option.label }}
+      </option>
+    </select>
+  </div>
+  <small *ngIf="error" class="form-error">{{ error }}</small>
+</div>

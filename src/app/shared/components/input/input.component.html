@@ -1,0 +1,15 @@
+<div class="form-field">
+  <label *ngIf="label" [for]="inputId" class="form-label">{{ label }}</label>
+  <input
+    [id]="inputId"
+    [type]="type"
+    [placeholder]="placeholder"
+    [value]="value"
+    [disabled]="disabled"
+    [required]="required"
+    [class]="inputClass"
+    (input)="onInput($event)"
+    (blur)="onBlur()"
+  />
+  <small *ngIf="error" class="form-error">{{ error }}</small>
+</div>

@@ -1,0 +1,15 @@
+<div class="form-field">
+  <label *ngIf="label" [for]="textareaId" class="form-label">{{ label }}</label>
+  <textarea
+    [id]="textareaId"
+    [placeholder]="placeholder"
+    [value]="value"
+    [disabled]="disabled"
+    [required]="required"
+    [rows]="rows"
+    [class]="textareaClass"
+    (input)="onInput($event)"
+    (blur)="onBlur()"
+  ></textarea>
+  <small *ngIf="error" class="form-error">{{ error }}</small>
+</div>

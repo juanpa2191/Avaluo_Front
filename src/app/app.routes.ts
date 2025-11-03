@@ -22,7 +22,17 @@ export const routes: Routes = [
   {
     path: 'usuarios',
     loadComponent: () => import('./features/usuarios/usuarios.component').then(m => m.UsuariosComponent),
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    children: [
+      {
+        path: 'crear',
+        loadComponent: () => import('./features/usuarios/crear-usuario/crear-usuario.component').then(m => m.CrearUsuarioComponent)
+      },
+      {
+        path: 'editar/:id',
+        loadComponent: () => import('./features/usuarios/editar-usuario/editar-usuario.component').then(m => m.EditarUsuarioComponent)
+      }
+    ]
   },
   {
     path: 'avaluos',
