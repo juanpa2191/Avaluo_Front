@@ -1,0 +1,121 @@
+<div class="form-section" [formGroup]="form">
+  <div class="form-grid">
+    <!-- Inmueble Objeto Avaluo -->
+    <div class="subsection">
+      <h4>Inmueble Objeto del Avalúo</h4>
+      <div class="subsection-grid">
+        <app-input
+          label="Escritura Pública"
+          formControlName="escrituraPublica"
+          placeholder="Número de escritura"
+          [error]="getErrorMessage('escrituraPublica')"
+        ></app-input>
+
+        <app-select
+          label="Modo de Adquisición"
+          formControlName="modoAdquisicion"
+          placeholder="Seleccionar modo"
+          [options]="modoAdquisicionOptions"
+          [error]="getErrorMessage('modoAdquisicion')"
+        ></app-select>
+
+        <app-input
+          label="Matrícula Inmobiliaria"
+          formControlName="matriculaInmobiliaria"
+          placeholder="Número de matrícula"
+          [error]="getErrorMessage('matriculaInmobiliaria')"
+        ></app-input>
+
+        <app-input
+          label="Ficha Inmobiliaria"
+          formControlName="fichaInmobiliaria"
+          placeholder="Número de ficha"
+          [error]="getErrorMessage('fichaInmobiliaria')"
+        ></app-input>
+
+        <app-input
+          label="Código Catastral"
+          formControlName="codigoCatastral"
+          placeholder="Código catastral"
+          [error]="getErrorMessage('codigoCatastral')"
+        ></app-input>
+      </div>
+    </div>
+
+    <!-- Tipo de Inmueble -->
+    <div class="subsection">
+      <h4>Tipo de Inmueble</h4>
+      <div class="subsection-grid">
+        <app-select
+          label="Tipo"
+          formControlName="tipoInmueble"
+          placeholder="Seleccionar tipo"
+          [options]="tipoInmuebleOptions"
+          [error]="getErrorMessage('tipoInmueble')"
+        ></app-select>
+
+        <app-select
+          label="Régimen"
+          formControlName="regimen"
+          placeholder="Seleccionar régimen"
+          [options]="regimenOptions"
+          [error]="getErrorMessage('regimen')"
+        ></app-select>
+
+        <app-select
+          label="Zona"
+          formControlName="zona"
+          placeholder="Seleccionar zona"
+          [options]="zonaOptions"
+          [error]="getErrorMessage('zona')"
+        ></app-select>
+      </div>
+    </div>
+
+    <!-- Dirección y Destinación Económica -->
+    <div class="subsection">
+      <h4>Dirección y Destinación Económica</h4>
+      <div class="subsection-grid">
+        <app-input
+          label="Dirección Completa"
+          formControlName="direccion"
+          placeholder="Dirección del inmueble"
+          [error]="getErrorMessage('direccion')"
+        ></app-input>
+
+        <app-input
+          label="Destinación Económica"
+          formControlName="destinacionEconomica"
+          placeholder="Uso económico del inmueble"
+          [error]="getErrorMessage('destinacionEconomica')"
+        ></app-input>
+
+        <div class="full-width">
+          <app-textarea
+            label="Descripción de la Dirección"
+            formControlName="descripcionDireccion"
+            placeholder="Descripción detallada de la ubicación"
+            [rows]="3"
+            [error]="getErrorMessage('descripcionDireccion')"
+          ></app-textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <p-button
+      label="Anterior: Información General"
+      icon="pi pi-arrow-left"
+      styleClass="p-button-secondary p-mr-2"
+      (onClick)="onPrevious()"
+    ></p-button>
+    <p-button
+      label="Siguiente: Características Generales"
+      icon="pi pi-arrow-right"
+      styleClass="p-button-primary"
+      (onClick)="onNext()"
+      [disabled]="form.invalid"
+    ></p-button>
+  </div>
+</div>

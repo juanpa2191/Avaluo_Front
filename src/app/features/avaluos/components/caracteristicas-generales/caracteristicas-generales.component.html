@@ -1,0 +1,145 @@
+<div class="form-section" [formGroup]="form">
+  <div class="form-grid">
+    <!-- Dimensiones del Predio -->
+    <div class="subsection">
+      <h4>Forma Geométrica y Dimensiones del Predio</h4>
+      <div class="subsection-grid">
+        <app-select
+          label="Forma del Terreno"
+          formControlName="formaTerreno"
+          placeholder="Seleccionar forma"
+          [options]="formaTerrenoOptions"
+          [error]="getErrorMessage('formaTerreno')"
+        ></app-select>
+
+        <app-input
+          label="Ancho del Terreno (m)"
+          type="number"
+          formControlName="anchoTerreno"
+          placeholder="0.00"
+          [error]="getErrorMessage('anchoTerreno')"
+        ></app-input>
+
+        <app-input
+          label="Largo del Terreno (m)"
+          type="number"
+          formControlName="largoTerreno"
+          placeholder="0.00"
+          [error]="getErrorMessage('largoTerreno')"
+        ></app-input>
+
+        <app-input
+          label="Área del Terreno (m²)"
+          type="number"
+          formControlName="areaTerreno"
+          placeholder="0.00"
+          [error]="getErrorMessage('areaTerreno')"
+        ></app-input>
+      </div>
+    </div>
+
+    <!-- Condiciones del Sector -->
+    <div class="subsection">
+      <h4>Condiciones del Sector</h4>
+      <div class="subsection-grid">
+        <div class="full-width">
+          <app-textarea
+            label="Descripción de las Condiciones del Sector"
+            formControlName="descripcionCondicionesSector"
+            placeholder="Describa las condiciones actuales del sector donde se ubica el inmueble"
+            [rows]="4"
+            [error]="getErrorMessage('descripcionCondicionesSector')"
+          ></app-textarea>
+        </div>
+
+        <div class="full-width">
+          <app-textarea
+            label="Observaciones"
+            formControlName="observaciones"
+            placeholder="Observaciones adicionales sobre el sector"
+            [rows]="3"
+            [error]="getErrorMessage('observaciones')"
+          ></app-textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- Estratificación y Entorno -->
+    <div class="subsection">
+      <h4>Estratificación Socioeconómica y Entorno</h4>
+      <div class="subsection-grid">
+        <app-select
+          label="Estrato Socioeconómico"
+          formControlName="estratoSocioeconomico"
+          placeholder="Seleccionar estrato"
+          [options]="estratoOptions"
+          [error]="getErrorMessage('estratoSocioeconomico')"
+        ></app-select>
+
+        <app-select
+          label="Entorno"
+          formControlName="entorno"
+          placeholder="Seleccionar entorno"
+          [options]="entornoOptions"
+          [error]="getErrorMessage('entorno')"
+        ></app-select>
+
+        <div class="full-width">
+          <app-textarea
+            label="Perspectivas de Valoración"
+            formControlName="perspectivasValoracion"
+            placeholder="Análisis de las perspectivas de valoración del inmueble"
+            [rows]="3"
+            [error]="getErrorMessage('perspectivasValoracion')"
+          ></app-textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- Actividades del Sector -->
+    <div class="subsection">
+      <h4>Actividades del Sector</h4>
+      <div class="subsection-grid">
+        <app-select
+          label="Uso Principal"
+          formControlName="usoPrincipal"
+          placeholder="Seleccionar uso principal"
+          [options]="usoPrincipalOptions"
+          [error]="getErrorMessage('usoPrincipal')"
+        ></app-select>
+
+        <app-select
+          label="Uso Complementario"
+          formControlName="usoComplementario"
+          placeholder="Seleccionar uso complementario"
+          [options]="usoComplementarioOptions"
+          [error]="getErrorMessage('usoComplementario')"
+        ></app-select>
+
+        <app-select
+          label="Uso Condicionado"
+          formControlName="usoCondicionado"
+          placeholder="Seleccionar uso condicionado"
+          [options]="usoCondicionadoOptions"
+          [error]="getErrorMessage('usoCondicionado')"
+        ></app-select>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <p-button
+      label="Anterior: Aspectos Jurídicos"
+      icon="pi pi-arrow-left"
+      styleClass="p-button-secondary p-mr-2"
+      (onClick)="onPrevious()"
+    ></p-button>
+    <p-button
+      label="Siguiente: Inspección Física"
+      icon="pi pi-arrow-right"
+      styleClass="p-button-primary"
+      (onClick)="onNext()"
+      [disabled]="form.invalid"
+    ></p-button>
+  </div>
+</div>

@@ -1,0 +1,89 @@
+<div class="form-section" [formGroup]="form">
+  <div class="form-grid">
+    <app-input
+      label="Fecha de Entrega"
+      type="date"
+      formControlName="fechaEntrega"
+      [error]="getErrorMessage('fechaEntrega')"
+    ></app-input>
+
+    <app-input
+      label="Fecha de Visita"
+      type="date"
+      formControlName="fechaVisita"
+      [error]="getErrorMessage('fechaVisita')"
+    ></app-input>
+
+    <app-input
+      label="Vigencia del Avalúo"
+      formControlName="vigenciaAvaluo"
+      placeholder="Ej: 2 años"
+      [error]="getErrorMessage('vigenciaAvaluo')"
+    ></app-input>
+
+    <app-input
+      label="Solicitante"
+      formControlName="solicitante"
+      placeholder="Nombre del solicitante"
+      [error]="getErrorMessage('solicitante')"
+    ></app-input>
+
+    <app-select
+      label="Departamento"
+      formControlName="departamento"
+      placeholder="Seleccionar departamento"
+      [options]="departamentosOptions"
+      [error]="getErrorMessage('departamento')"
+    ></app-select>
+
+    <app-input
+      label="Municipio"
+      formControlName="municipio"
+      placeholder="Nombre del municipio"
+      [error]="getErrorMessage('municipio')"
+    ></app-input>
+
+    <app-input
+      label="Barrio/Vereda"
+      formControlName="barrioVereda"
+      placeholder="Nombre del barrio o vereda"
+      [error]="getErrorMessage('barrioVereda')"
+    ></app-input>
+
+    <app-select
+      label="Objeto del Avalúo"
+      formControlName="objetoAvaluo"
+      placeholder="Seleccionar tipo de inmueble"
+      [options]="objetoAvaluoOptions"
+      [error]="getErrorMessage('objetoAvaluo')"
+    ></app-select>
+
+    <app-select
+      label="Destino del Avalúo"
+      formControlName="destinoAvaluo"
+      placeholder="Seleccionar destino"
+      [options]="destinoAvaluoOptions"
+      [error]="getErrorMessage('destinoAvaluo')"
+    ></app-select>
+
+    <div class="full-width">
+      <app-multi-select
+        label="Responsabilidades del Avaluador"
+        formControlName="responsabilidadesAvaluador"
+        placeholder="Seleccionar responsabilidades"
+        [options]="responsabilidadesOptions"
+        [error]="getErrorMessage('responsabilidadesAvaluador')"
+      ></app-multi-select>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <p-button
+      label="Siguiente: Aspectos Jurídicos"
+      icon="pi pi-arrow-right"
+      styleClass="p-button-primary"
+      (onClick)="onNext()"
+      [disabled]="form.invalid"
+    ></p-button>
+  </div>
+</div>

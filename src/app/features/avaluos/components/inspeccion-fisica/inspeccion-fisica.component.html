@@ -1,0 +1,150 @@
+<div class="form-section" [formGroup]="form">
+  <div class="form-grid">
+    <!-- Esquema Normativo -->
+    <div class="subsection">
+      <h4>Esquema Normativo</h4>
+      <div class="subsection-grid">
+        <app-input
+          label="Esquema Normativo"
+          formControlName="esquemaNormativo"
+          placeholder="Ej: POT, PBOT, etc."
+          [error]="getErrorMessage('esquemaNormativo')"
+        ></app-input>
+
+        <app-input
+          label="Zona/Barrio"
+          formControlName="zonaBarrio"
+          placeholder="Nombre de la zona o barrio"
+          [error]="getErrorMessage('zonaBarrio')"
+        ></app-input>
+
+        <app-select
+          label="Clasificación del Suelo"
+          formControlName="clasificacionSuelo"
+          placeholder="Seleccionar clasificación"
+          [options]="clasificacionSueloOptions"
+          [error]="getErrorMessage('clasificacionSuelo')"
+        ></app-select>
+
+        <app-select
+          label="Categoría de Uso"
+          formControlName="categoriaUso"
+          placeholder="Seleccionar categoría"
+          [options]="categoriaUsoOptions"
+          [error]="getErrorMessage('categoriaUso')"
+        ></app-select>
+
+        <app-select
+          label="Subcategoría de Uso"
+          formControlName="subcategoriaUso"
+          placeholder="Seleccionar subcategoría"
+          [options]="subcategoriaUsoOptions"
+          [error]="getErrorMessage('subcategoriaUso')"
+        ></app-select>
+
+        <app-select
+          label="Tratamiento"
+          formControlName="tratamiento"
+          placeholder="Seleccionar tratamiento"
+          [options]="tratamientoOptions"
+          [error]="getErrorMessage('tratamiento')"
+        ></app-select>
+      </div>
+    </div>
+
+    <!-- Normas Urbanísticas -->
+    <div class="subsection">
+      <h4>Normas Urbanísticas</h4>
+      <div class="subsection-grid">
+        <app-input
+          label="Altura Máxima (pisos)"
+          type="number"
+          formControlName="alturaMaxima"
+          placeholder="0"
+          [error]="getErrorMessage('alturaMaxima')"
+        ></app-input>
+
+        <app-input
+          label="Densidad Habitacional Máxima (hab/ha)"
+          type="number"
+          formControlName="densidadHabitacionalMaxima"
+          placeholder="0.00"
+          [error]="getErrorMessage('densidadHabitacionalMaxima')"
+        ></app-input>
+
+        <app-input
+          label="Índice de Ocupación (%)"
+          type="number"
+          formControlName="indiceOcupacion"
+          placeholder="0.00"
+          [error]="getErrorMessage('indiceOcupacion')"
+        ></app-input>
+
+        <app-input
+          label="Área Mínima de Lote (m²)"
+          type="number"
+          formControlName="areaMinimaLote"
+          placeholder="0.00"
+          [error]="getErrorMessage('areaMinimaLote')"
+        ></app-input>
+
+        <app-select
+          label="Amenaza de Movimiento en Masa"
+          formControlName="amenazaMovimientoMasa"
+          placeholder="Seleccionar nivel de amenaza"
+          [options]="amenazaMovimientoMasaOptions"
+          [error]="getErrorMessage('amenazaMovimientoMasa')"
+        ></app-select>
+      </div>
+    </div>
+
+    <!-- Especificaciones del Inmueble -->
+    <div class="subsection">
+      <h4>Especificaciones del Inmueble</h4>
+      <div class="subsection-grid">
+        <div class="full-width">
+          <app-textarea
+            label="Características Específicas"
+            formControlName="caracteristicasEspecificas"
+            placeholder="Describa las características específicas del inmueble"
+            [rows]="4"
+            [error]="getErrorMessage('caracteristicasEspecificas')"
+          ></app-textarea>
+        </div>
+
+        <div class="full-width">
+          <app-textarea
+            label="Estado de Conservación"
+            formControlName="estadoConservacion"
+            placeholder="Describa el estado actual de conservación del inmueble"
+            [rows]="4"
+            [error]="getErrorMessage('estadoConservacion')"
+          ></app-textarea>
+        </div>
+
+        <app-input
+          label="Servidumbres"
+          formControlName="servidumbres"
+          placeholder="Servidumbres aplicables"
+          [error]="getErrorMessage('servidumbres')"
+        ></app-input>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <p-button
+      label="Anterior: Características Generales"
+      icon="pi pi-arrow-left"
+      styleClass="p-button-secondary p-mr-2"
+      (onClick)="onPrevious()"
+    ></p-button>
+    <p-button
+      label="Guardar Avalúo"
+      icon="pi pi-check"
+      styleClass="p-button-success"
+      (onClick)="onSubmit()"
+      [disabled]="form.invalid"
+    ></p-button>
+  </div>
+</div>

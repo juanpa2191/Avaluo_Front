@@ -7,12 +7,12 @@ import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { TabViewModule } from 'primeng/tabview';
 import { SidebarComponent } from '../../../shared/components/sidebar/sidebar.component';
-import { InputComponent } from '../../../shared/components/input/input.component';
-import { TextareaComponent } from '../../../shared/components/textarea/textarea.component';
-import { SelectComponent, SelectOption } from '../../../shared/components/select/select.component';
-import { MultiSelectComponent } from '../../../shared/components/multi-select/multi-select.component';
-import { ButtonComponent } from '../../../shared/components/button/button.component';
+import { InformacionGeneralComponent } from '../components/informacion-general/informacion-general.component';
+import { AspectosJuridicosComponent } from '../components/aspectos-juridicos/aspectos-juridicos.component';
+import { CaracteristicasGeneralesComponent } from '../components/caracteristicas-generales/caracteristicas-generales.component';
+import { InspeccionFisicaComponent } from '../components/inspeccion-fisica/inspeccion-fisica.component';
 import { CommonModule } from '@angular/common';
+import { SelectOption } from '../../../shared/components/select/select.component';
 
 @Component({
   selector: 'app-crear-avaluo',
@@ -24,11 +24,10 @@ import { CommonModule } from '@angular/common';
     CardModule,
     TabViewModule,
     SidebarComponent,
-    InputComponent,
-    TextareaComponent,
-    SelectComponent,
-    MultiSelectComponent,
-    ButtonComponent
+    InformacionGeneralComponent,
+    AspectosJuridicosComponent,
+    CaracteristicasGeneralesComponent,
+    InspeccionFisicaComponent
   ],
   templateUrl: './crear-avaluo.component.html',
   styleUrls: ['./crear-avaluo.component.css']
@@ -36,6 +35,7 @@ import { CommonModule } from '@angular/common';
 export class CrearAvaluoComponent {
   avaluoForm: FormGroup;
   loading = false;
+  activeTab = 0;
 
   // Opciones para selects
   departamentosOptions: SelectOption[] = [
@@ -78,6 +78,27 @@ export class CrearAvaluoComponent {
     { label: 'Adjudicación', value: 'Adjudicación' }
   ];
 
+  tipoInmuebleOptions: SelectOption[] = [
+    { label: 'Casa', value: 'Casa' },
+    { label: 'Apartamento', value: 'Apartamento' },
+    { label: 'Local Comercial', value: 'Local Comercial' },
+    { label: 'Oficina', value: 'Oficina' },
+    { label: 'Bodega', value: 'Bodega' },
+    { label: 'Lote', value: 'Lote' }
+  ];
+
+  regimenOptions: SelectOption[] = [
+    { label: 'Propiedad Horizontal', value: 'Propiedad Horizontal' },
+    { label: 'Propiedad Individual', value: 'Propiedad Individual' },
+    { label: 'Condominio', value: 'Condominio' }
+  ];
+
+  zonaOptions: SelectOption[] = [
+    { label: 'Urbana', value: 'Urbana' },
+    { label: 'Rural', value: 'Rural' },
+    { label: 'Suburbana', value: 'Suburbana' }
+  ];
+
   formaTerrenoOptions: SelectOption[] = [
     { label: 'Rectangular', value: 'Rectangular' },
     { label: 'Cuadrado', value: 'Cuadrado' },
@@ -97,6 +118,64 @@ export class CrearAvaluoComponent {
     { label: 'Comercial', value: 'Comercial' },
     { label: 'Industrial', value: 'Industrial' },
     { label: 'Institucional', value: 'Institucional' }
+  ];
+
+  subcategoriaUsoOptions: SelectOption[] = [
+    { label: 'Vivienda Unifamiliar', value: 'Vivienda Unifamiliar' },
+    { label: 'Vivienda Multifamiliar', value: 'Vivienda Multifamiliar' },
+    { label: 'Comercio Local', value: 'Comercio Local' },
+    { label: 'Comercio Regional', value: 'Comercio Regional' },
+    { label: 'Oficinas', value: 'Oficinas' },
+    { label: 'Bodegas', value: 'Bodegas' }
+  ];
+
+  tratamientoOptions: SelectOption[] = [
+    { label: 'Protección', value: 'Protección' },
+    { label: 'Desarrollo', value: 'Desarrollo' },
+    { label: 'Renovación', value: 'Renovación' },
+    { label: 'Conservación', value: 'Conservación' }
+  ];
+
+  amenazaMovimientoMasaOptions: SelectOption[] = [
+    { label: 'Baja', value: 'Baja' },
+    { label: 'Media', value: 'Media' },
+    { label: 'Alta', value: 'Alta' },
+    { label: 'Muy Alta', value: 'Muy Alta' }
+  ];
+
+  estratoOptions: SelectOption[] = [
+    { label: 'Estrato 1', value: '1' },
+    { label: 'Estrato 2', value: '2' },
+    { label: 'Estrato 3', value: '3' },
+    { label: 'Estrato 4', value: '4' },
+    { label: 'Estrato 5', value: '5' },
+    { label: 'Estrato 6', value: '6' }
+  ];
+
+  entornoOptions: SelectOption[] = [
+    { label: 'Urbano', value: 'Urbano' },
+    { label: 'Suburbano', value: 'Suburbano' },
+    { label: 'Rural', value: 'Rural' }
+  ];
+
+  usoPrincipalOptions: SelectOption[] = [
+    { label: 'Residencial', value: 'Residencial' },
+    { label: 'Comercial', value: 'Comercial' },
+    { label: 'Industrial', value: 'Industrial' },
+    { label: 'Institucional', value: 'Institucional' }
+  ];
+
+  usoComplementarioOptions: SelectOption[] = [
+    { label: 'Comercial', value: 'Comercial' },
+    { label: 'Servicios', value: 'Servicios' },
+    { label: 'Oficinas', value: 'Oficinas' },
+    { label: 'Ninguno', value: 'Ninguno' }
+  ];
+
+  usoCondicionadoOptions: SelectOption[] = [
+    { label: 'Equipamientos', value: 'Equipamientos' },
+    { label: 'Espacios Públicos', value: 'Espacios Públicos' },
+    { label: 'Ninguno', value: 'Ninguno' }
   ];
 
   constructor(
@@ -123,6 +202,12 @@ export class CrearAvaluoComponent {
       matriculaInmobiliaria: ['', [Validators.required]],
       fichaInmobiliaria: ['', [Validators.required]],
       codigoCatastral: ['', [Validators.required]],
+      tipoInmueble: ['', [Validators.required]],
+      regimen: ['', [Validators.required]],
+      zona: ['', [Validators.required]],
+      direccion: ['', [Validators.required]],
+      destinacionEconomica: ['', [Validators.required]],
+      descripcionDireccion: [''],
 
       // Características Generales
       formaTerreno: ['', [Validators.required]],
@@ -131,13 +216,31 @@ export class CrearAvaluoComponent {
       areaTerreno: ['', [Validators.required, Validators.min(0)]],
       descripcionCondicionesSector: ['', [Validators.required]],
       observaciones: [''],
+      estratoSocioeconomico: ['', [Validators.required]],
+      entorno: ['', [Validators.required]],
+      perspectivasValoracion: [''],
+      usoPrincipal: ['', [Validators.required]],
+      usoComplementario: ['', [Validators.required]],
+      usoCondicionado: ['', [Validators.required]],
 
       // Inspección Física
       esquemaNormativo: ['', [Validators.required]],
       zonaBarrio: ['', [Validators.required]],
       clasificacionSuelo: ['', [Validators.required]],
       categoriaUso: ['', [Validators.required]],
-      alturaMaxima: ['', [Validators.required]]
+      subcategoriaUso: [''],
+      tratamiento: [''],
+      alturaMaxima: ['', [Validators.required]],
+      densidadHabitacionalMaxima: [''],
+      indiceOcupacion: [''],
+      espacioPublicoEquipamientos: [''],
+      areaMinimaLote: [''],
+      amenazaMovimientoMasa: [''],
+      servidumbres: [''],
+
+      // Especificaciones del Inmueble
+      caracteristicasEspecificas: [''],
+      estadoConservacion: ['']
     });
   }
 
@@ -184,15 +287,15 @@ export class CrearAvaluoComponent {
           },
           propietarios: [],
           tipoInmueble: {
-            tipo: '',
-            regimen: '',
-            zona: ''
+            tipo: formValue.tipoInmueble,
+            regimen: formValue.regimen,
+            zona: formValue.zona
           },
           direccionYdestinacionEconomica: {
-            direccion: '',
-            destinacionEconomica: '',
+            direccion: formValue.direccion,
+            destinacionEconomica: formValue.destinacionEconomica,
             imagen: '',
-            descripcion: ''
+            descripcion: formValue.descripcionDireccion
           },
           certificadoTradicionLibertad: {
             pin: '',
@@ -232,10 +335,10 @@ export class CrearAvaluoComponent {
           descripcionCondicionesSector: formValue.descripcionCondicionesSector,
           observaciones: formValue.observaciones,
           estratoSocioeconomico: {
-            descripcion: '',
+            descripcion: formValue.estratoSocioeconomico,
             tablaEstratificacionNacional: []
           },
-          entorno: '',
+          entorno: formValue.entorno,
           viasPrincipales: {
             descripcion: '',
             acceso: {
@@ -279,11 +382,11 @@ export class CrearAvaluoComponent {
             },
             imagenes: []
           },
-          perspectivasValoracion: '',
+          perspectivasValoracion: formValue.perspectivasValoracion,
           actividadesSector: {
-            usoPrincipal: '',
-            usoComplementario: '',
-            usoCondicionado: '',
+            usoPrincipal: formValue.usoPrincipal,
+            usoComplementario: formValue.usoComplementario,
+            usoCondicionado: formValue.usoCondicionado,
             usoProhibido: ''
           }
         },
@@ -292,15 +395,15 @@ export class CrearAvaluoComponent {
           zonaBarrio: formValue.zonaBarrio,
           clasificacionSuelo: formValue.clasificacionSuelo,
           categoriaUso: formValue.categoriaUso,
-          subcategoriaUso: '',
-          tratamiento: '',
-          servidumbres: '',
+          subcategoriaUso: formValue.subcategoriaUso,
+          tratamiento: formValue.tratamiento,
+          servidumbres: formValue.servidumbres,
           alturaMaxima: formValue.alturaMaxima,
-          densidadHabitacionalMaxima: '',
-          indiceOcupacion: '',
-          espacioPublicoEquipamientos: '',
-          areaMinimaLote: '',
-          amenazaMovimientoMasa: '',
+          densidadHabitacionalMaxima: formValue.densidadHabitacionalMaxima,
+          indiceOcupacion: formValue.indiceOcupacion,
+          espacioPublicoEquipamientos: formValue.espacioPublicoEquipamientos,
+          areaMinimaLote: formValue.areaMinimaLote,
+          amenazaMovimientoMasa: formValue.amenazaMovimientoMasa,
           especificacionesConstructivas: {
             especificacionConstructiva: [],
             observacion: '',
@@ -310,8 +413,8 @@ export class CrearAvaluoComponent {
           }
         },
         especificacionesInmueble: {
-          caracteristicasEspecificas: '',
-          estadoConservacion: ''
+          caracteristicasEspecificas: formValue.caracteristicasEspecificas,
+          estadoConservacion: formValue.estadoConservacion
         },
         imagenesInmueble: []
       };
@@ -330,5 +433,21 @@ export class CrearAvaluoComponent {
 
   volver() {
     this.router.navigate(['/avaluos']);
+  }
+
+  onTabChange(index: number) {
+    this.activeTab = index;
+  }
+
+  onNext() {
+    if (this.activeTab < 3) {
+      this.activeTab++;
+    }
+  }
+
+  onPrevious() {
+    if (this.activeTab > 0) {
+      this.activeTab--;
+    }
   }
 }
