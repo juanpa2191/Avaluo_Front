@@ -57,6 +57,39 @@ export class AuthService {
     });
   }
 
+  // Método para verificar si el token está próximo a expirar
+  isTokenExpiringSoon(): boolean {
+    const token = this.getToken();
+    if (!token) return true;
+
+    try {
+      // Decodificar el payload del JWT (sin verificar firma)
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      const currentTime = Math.floor(Date.now() / 1000);
+      const timeToExpiry = payload.exp - currentTime;
+
+      // Considerar que expira pronto si quedan menos de 5 minutos
+      return timeToExpiry < 300; // 5 minutos en segundos
+    } catch (error) {
+      console.error('Error decodificando token:', error);
+      return true; // Si no se puede decodificar, asumir que está expirado
+    }
+  }
+
+  // Método para obtener el tiempo restante del token
+  getTokenTimeRemaining(): number {
+    const token = this.getToken();
+    if (!token) return 0;
+
+    try {
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      const currentTime = Math.floor(Date.now() / 1000);
+      return Math.max(0, payload.exp - currentTime);
+    } catch (error) {
+      return 0;
+    }
+  }
+
   getToken(): string | null {
     return localStorage.getItem('token');
   }
