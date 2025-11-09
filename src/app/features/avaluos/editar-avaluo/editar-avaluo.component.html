@@ -15,25 +15,40 @@
     <div class="content">
       <p-card header="Editar Avalúo" *ngIf="!loading">
         <form [formGroup]="avaluoForm" (ngSubmit)="onSubmit()">
-          <p-tabView [(activeIndex)]="activeTab">
+          <p-tabView [(activeIndex)]="activeTab" (onChange)="onTabChange($event.index)">
             <!-- Información General -->
             <p-tabPanel header="Información General">
-              <app-informacion-general [form]="avaluoForm"></app-informacion-general>
+              <app-informacion-general
+                [form]="avaluoForm"
+                (next)="onNext()"
+              ></app-informacion-general>
             </p-tabPanel>
 
             <!-- Aspectos Jurídicos -->
             <p-tabPanel header="Aspectos Jurídicos">
-              <app-aspectos-juridicos [form]="avaluoForm"></app-aspectos-juridicos>
+              <app-aspectos-juridicos
+                [form]="avaluoForm"
+                (previous)="onPrevious()"
+                (next)="onNext()"
+              ></app-aspectos-juridicos>
             </p-tabPanel>
 
             <!-- Características Generales -->
             <p-tabPanel header="Características Generales">
-              <app-caracteristicas-generales [form]="avaluoForm"></app-caracteristicas-generales>
+              <app-caracteristicas-generales
+                [form]="avaluoForm"
+                (previous)="onPrevious()"
+                (next)="onNext()"
+              ></app-caracteristicas-generales>
             </p-tabPanel>
 
             <!-- Inspección Física -->
             <p-tabPanel header="Inspección Física">
-              <app-inspeccion-fisica [form]="avaluoForm"></app-inspeccion-fisica>
+              <app-inspeccion-fisica
+                [form]="avaluoForm"
+                (previous)="onPrevious()"
+                (submit)="onSubmit()"
+              ></app-inspeccion-fisica>
             </p-tabPanel>
           </p-tabView>
 
