@@ -185,9 +185,9 @@ export class CrearAvaluoComponent {
   ) {
     this.avaluoForm = this.fb.group({
       // Información General
-      fechaEntrega: ['', [Validators.required]],
-      fechaVisita: ['', [Validators.required]],
-      vigenciaAvaluo: ['', [Validators.required]],
+      fechaInspeccion: ['', [Validators.required]],
+      fechaInforme: ['', [Validators.required]],
+      vigenciaInforme: ['', [Validators.required]],
       solicitante: ['', [Validators.required]],
       departamento: ['', [Validators.required]],
       municipio: ['', [Validators.required]],
@@ -266,9 +266,9 @@ export class CrearAvaluoComponent {
       const formValue = this.avaluoForm.value;
       const avaluoData: CreateAvaluoDto = {
         informacionGeneral: {
-          fechaEntrega: formValue.fechaEntrega,
-          fechaVisita: formValue.fechaVisita,
-          vigenciaAvaluo: formValue.vigenciaAvaluo,
+          fechaInspeccion: formValue.fechaInspeccion,
+          fechaInforme: formValue.fechaInforme,
+          vigenciaInforme: formValue.vigenciaInforme,
           solicitante: formValue.solicitante,
           departamento: formValue.departamento,
           municipio: formValue.municipio,

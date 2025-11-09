@@ -1,9 +1,9 @@
 export interface Avaluo {
   id?: string;
   informacionGeneral: {
-    fechaEntrega: string;
-    fechaVisita: string;
-    vigenciaAvaluo: string;
+    fechaInspeccion: string;
+    fechaInforme: string;
+    vigenciaInforme: string;
     solicitante: string;
     departamento: string;
     municipio: string;

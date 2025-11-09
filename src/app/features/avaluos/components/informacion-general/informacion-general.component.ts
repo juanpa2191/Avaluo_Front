@@ -5,6 +5,7 @@ import { CardModule } from 'primeng/card';
 import { InputComponent } from '../../../../shared/components/input/input.component';
 import { SelectComponent, SelectOption } from '../../../../shared/components/select/select.component';
 import { MultiSelectComponent } from '../../../../shared/components/multi-select/multi-select.component';
+import { TextareaComponent } from '../../../../shared/components/textarea/textarea.component';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -17,7 +18,8 @@ import { CommonModule } from '@angular/common';
     CardModule,
     InputComponent,
     SelectComponent,
-    MultiSelectComponent
+    MultiSelectComponent,
+    TextareaComponent
   ],
   templateUrl: './informacion-general.component.html',
   styleUrls: ['./informacion-general.component.css']

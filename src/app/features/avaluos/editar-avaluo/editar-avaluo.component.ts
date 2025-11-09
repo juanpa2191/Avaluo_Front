@@ -110,9 +110,9 @@ export class EditarAvaluoComponent implements OnInit {
   ) {
     this.avaluoForm = this.fb.group({
       // Información General
-      fechaEntrega: ['', [Validators.required]],
-      fechaVisita: ['', [Validators.required]],
-      vigenciaAvaluo: ['', [Validators.required]],
+      fechaInspeccion: ['', [Validators.required]],
+      fechaInforme: ['', [Validators.required]],
+      vigenciaInforme: ['', [Validators.required]],
       solicitante: ['', [Validators.required]],
       departamento: ['', [Validators.required]],
       municipio: ['', [Validators.required]],
@@ -188,9 +188,9 @@ export class EditarAvaluoComponent implements OnInit {
   populateForm(avaluo: Avaluo) {
     this.avaluoForm.patchValue({
       // Información General
-      fechaEntrega: avaluo.informacionGeneral.fechaEntrega,
-      fechaVisita: avaluo.informacionGeneral.fechaVisita,
-      vigenciaAvaluo: avaluo.informacionGeneral.vigenciaAvaluo,
+      fechaInspeccion: avaluo.informacionGeneral.fechaInspeccion,
+      fechaInforme: avaluo.informacionGeneral.fechaInforme,
+      vigenciaInforme: avaluo.informacionGeneral.vigenciaInforme,
       solicitante: avaluo.informacionGeneral.solicitante,
       departamento: avaluo.informacionGeneral.departamento,
       municipio: avaluo.informacionGeneral.municipio,
@@ -283,9 +283,9 @@ export class EditarAvaluoComponent implements OnInit {
       const formValue = this.avaluoForm.value;
       const avaluoData: UpdateAvaluoDto = {
         informacionGeneral: {
-          fechaEntrega: formValue.fechaEntrega,
-          fechaVisita: formValue.fechaVisita,
-          vigenciaAvaluo: formValue.vigenciaAvaluo,
+          fechaInspeccion: formValue.fechaInspeccion,
+          fechaInforme: formValue.fechaInforme,
+          vigenciaInforme: formValue.vigenciaInforme,
           solicitante: formValue.solicitante,
           departamento: formValue.departamento,
           municipio: formValue.municipio,

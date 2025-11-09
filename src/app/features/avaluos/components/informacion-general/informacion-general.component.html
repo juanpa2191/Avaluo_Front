@@ -1,24 +1,24 @@
 <div class="form-section" [formGroup]="form">
   <div class="form-grid">
     <app-input
-      label="Fecha de Entrega"
+      label="Fecha de Inspección"
       type="date"
-      formControlName="fechaEntrega"
-      [error]="getErrorMessage('fechaEntrega')"
+      formControlName="fechaInspeccion"
+      [error]="getErrorMessage('fechaInspeccion')"
     ></app-input>
 
     <app-input
-      label="Fecha de Visita"
+      label="Fecha del Informe"
       type="date"
-      formControlName="fechaVisita"
-      [error]="getErrorMessage('fechaVisita')"
+      formControlName="fechaInforme"
+      [error]="getErrorMessage('fechaInforme')"
     ></app-input>
 
     <app-input
-      label="Vigencia del Avalúo"
-      formControlName="vigenciaAvaluo"
-      placeholder="Ej: 2 años"
-      [error]="getErrorMessage('vigenciaAvaluo')"
+      label="Vigencia del Informe"
+      type="date"
+      formControlName="vigenciaInforme"
+      [error]="getErrorMessage('vigenciaInforme')"
     ></app-input>
 
     <app-input
@@ -50,21 +50,25 @@
       [error]="getErrorMessage('barrioVereda')"
     ></app-input>
 
-    <app-select
-      label="Objeto del Avalúo"
-      formControlName="objetoAvaluo"
-      placeholder="Seleccionar tipo de inmueble"
-      [options]="objetoAvaluoOptions"
-      [error]="getErrorMessage('objetoAvaluo')"
-    ></app-select>
+    <div class="full-width">
+      <app-textarea
+        label="Objeto del Avalúo"
+        formControlName="objetoAvaluo"
+        placeholder="Describa detalladamente el objeto del avalúo (tipo de inmueble, características principales, etc.)"
+        [rows]="3"
+        [error]="getErrorMessage('objetoAvaluo')"
+      ></app-textarea>
+    </div>
 
-    <app-select
-      label="Destino del Avalúo"
-      formControlName="destinoAvaluo"
-      placeholder="Seleccionar destino"
-      [options]="destinoAvaluoOptions"
-      [error]="getErrorMessage('destinoAvaluo')"
-    ></app-select>
+    <div class="full-width">
+      <app-textarea
+        label="Destino del Avalúo"
+        formControlName="destinoAvaluo"
+        placeholder="Describa el destino o propósito del avalúo (venta, hipoteca, judicial, etc.)"
+        [rows]="3"
+        [error]="getErrorMessage('destinoAvaluo')"
+      ></app-textarea>
+    </div>
 
     <div class="full-width">
       <app-multi-select
