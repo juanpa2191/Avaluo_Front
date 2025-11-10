@@ -72,6 +72,58 @@
       </div>
     </div>
 
+    <!-- Propietarios -->
+    <div class="subsection">
+      <h4>Propietarios
+        <p-button
+          label="Agregar Propietario"
+          icon="pi pi-plus"
+          styleClass="p-button-sm p-button-success p-ml-2"
+          (onClick)="agregarPropietario()"
+        ></p-button>
+      </h4>
+      <div formArrayName="propietarios">
+        <div
+          *ngFor="let propietario of propietarios.controls; let i = index"
+          [formGroupName]="i"
+          class="propietario-item"
+        >
+          <div class="propietario-header">
+            <h5>Propietario {{ i + 1 }}</h5>
+            <p-button
+              icon="pi pi-trash"
+              styleClass="p-button-sm p-button-danger"
+              pTooltip="Eliminar propietario"
+              (onClick)="eliminarPropietario(i)"
+            ></p-button>
+          </div>
+          <div class="subsection-grid">
+            <app-input
+              label="Nombre del Propietario"
+              formControlName="propietario"
+              placeholder="Nombre completo"
+              [error]="getErrorMessage(`propietarios.${i}.propietario`)"
+            ></app-input>
+
+            <app-select
+              label="Tipo de Identificación"
+              formControlName="tipoIdentificacion"
+              placeholder="Seleccionar tipo"
+              [options]="tipoIdentificacionOptions"
+              [error]="getErrorMessage(`propietarios.${i}.tipoIdentificacion`)"
+            ></app-select>
+
+            <app-input
+              label="Número de Identificación"
+              formControlName="numeroIdentificacion"
+              placeholder="Número de documento"
+              [error]="getErrorMessage(`propietarios.${i}.numeroIdentificacion`)"
+            ></app-input>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Dirección y Destinación Económica -->
     <div class="subsection">
       <h4>Dirección y Destinación Económica</h4>
@@ -97,6 +149,175 @@
             placeholder="Descripción detallada de la ubicación"
             [rows]="3"
             [error]="getErrorMessage('descripcionDireccion')"
+          ></app-textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- Certificado Tradición Libertad -->
+    <div class="subsection">
+      <h4>Certificado Tradición y Libertad</h4>
+      <div class="subsection-grid">
+        <app-input
+          label="PIN"
+          formControlName="certificadoPin"
+          placeholder="PIN del certificado"
+          [error]="getErrorMessage('certificadoPin')"
+        ></app-input>
+
+        <app-input
+          label="Fecha de Impresión"
+          type="date"
+          formControlName="certificadoFechaImpreso"
+          [error]="getErrorMessage('certificadoFechaImpreso')"
+        ></app-input>
+
+        <app-input
+          label="Hora de Impresión"
+          type="time"
+          formControlName="certificadoHoraImpresion"
+          [error]="getErrorMessage('certificadoHoraImpresion')"
+        ></app-input>
+
+        <app-input
+          label="Matrícula Inmobiliaria"
+          formControlName="certificadoMatriculaInmobiliaria"
+          placeholder="Matrícula del certificado"
+          [error]="getErrorMessage('certificadoMatriculaInmobiliaria')"
+        ></app-input>
+
+        <app-input
+          label="Propietario"
+          formControlName="certificadoPropietario"
+          placeholder="Nombre del propietario"
+          [error]="getErrorMessage('certificadoPropietario')"
+        ></app-input>
+      </div>
+    </div>
+
+    <!-- Escritura Pública -->
+    <div class="subsection">
+      <h4>Escritura Pública</h4>
+      <div class="subsection-grid">
+        <app-input
+          label="Número de Escritura"
+          formControlName="escrituraNumero"
+          placeholder="Número de la escritura"
+          [error]="getErrorMessage('escrituraNumero')"
+        ></app-input>
+
+        <app-input
+          label="Fecha de Escritura"
+          type="date"
+          formControlName="escrituraFecha"
+          [error]="getErrorMessage('escrituraFecha')"
+        ></app-input>
+
+        <app-input
+          label="Matrícula Inmobiliaria"
+          formControlName="escrituraMatriculaInmobiliaria"
+          placeholder="Matrícula de la escritura"
+          [error]="getErrorMessage('escrituraMatriculaInmobiliaria')"
+        ></app-input>
+
+        <app-input
+          label="Propietario"
+          formControlName="escrituraPropietario"
+          placeholder="Nombre del propietario"
+          [error]="getErrorMessage('escrituraPropietario')"
+        ></app-input>
+      </div>
+    </div>
+
+    <!-- Impuesto Predial -->
+    <div class="subsection">
+      <h4>Impuesto Predial</h4>
+      <div class="subsection-grid">
+        <app-input
+          label="Período Facturado"
+          formControlName="impuestoPeriodoFacturado"
+          placeholder="Ej: 2024"
+          [error]="getErrorMessage('impuestoPeriodoFacturado')"
+        ></app-input>
+
+        <app-input
+          label="Fecha"
+          type="date"
+          formControlName="impuestoFecha"
+          [error]="getErrorMessage('impuestoFecha')"
+        ></app-input>
+
+        <app-input
+          label="Matrícula/Ficha"
+          formControlName="impuestoMatriculaFicha"
+          placeholder="Número de matrícula o ficha"
+          [error]="getErrorMessage('impuestoMatriculaFicha')"
+        ></app-input>
+
+        <app-input
+          label="Código Catastral"
+          formControlName="impuestoCodigoCatastral"
+          placeholder="Código catastral"
+          [error]="getErrorMessage('impuestoCodigoCatastral')"
+        ></app-input>
+
+        <app-input
+          label="Dirección"
+          formControlName="impuestoDireccion"
+          placeholder="Dirección del impuesto"
+          [error]="getErrorMessage('impuestoDireccion')"
+        ></app-input>
+
+        <app-input
+          label="Propietario"
+          formControlName="impuestoPropietario"
+          placeholder="Nombre del propietario"
+          [error]="getErrorMessage('impuestoPropietario')"
+        ></app-input>
+      </div>
+    </div>
+
+    <!-- Fachadas -->
+    <div class="subsection">
+      <h4>Fachadas del Inmueble</h4>
+      <div class="subsection-grid">
+        <div class="full-width">
+          <app-textarea
+            label="Fachada Frontal"
+            formControlName="fachadaFrontal"
+            placeholder="Descripción de la fachada frontal"
+            [rows]="2"
+            [error]="getErrorMessage('fachadaFrontal')"
+          ></app-textarea>
+        </div>
+
+        <div class="full-width">
+          <app-textarea
+            label="Fachada Posterior"
+            formControlName="fachadaPosterior"
+            placeholder="Descripción de la fachada posterior"
+            [rows]="2"
+            [error]="getErrorMessage('fachadaPosterior')"
+          ></app-textarea>
+        </div>
+
+        <div class="full-width">
+          <app-textarea
+            label="Fachada Lateral Izquierda"
+            formControlName="fachadaLateralIzquierda"
+            placeholder="Descripción de la fachada lateral izquierda"
+            [rows]="2"
+            [error]="getErrorMessage('fachadaLateralIzquierda')"
+          ></app-textarea>
+        </div>
+
+        <div class="full-width">
+          <app-textarea
+            label="Fachada Lateral Derecha"
+            formControlName="fachadaLateralDerecha"
+            placeholder="Descripción de la fachada lateral derecha"
+            [rows]="2"
+            [error]="getErrorMessage('fachadaLateralDerecha')"
           ></app-textarea>
         </div>
       </div>

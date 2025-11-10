@@ -197,6 +197,7 @@ export class CrearAvaluoComponent {
       responsabilidadesAvaluador: [[], [Validators.required, Validators.minLength(1)]],
 
       // Aspectos Jurídicos
+      propietarios: this.fb.array([]),
       escrituraPublica: ['', [Validators.required]],
       modoAdquisicion: ['', [Validators.required]],
       matriculaInmobiliaria: ['', [Validators.required]],
@@ -208,6 +209,25 @@ export class CrearAvaluoComponent {
       direccion: ['', [Validators.required]],
       destinacionEconomica: ['', [Validators.required]],
       descripcionDireccion: [''],
+      certificadoPin: [''],
+      certificadoFechaImpreso: [''],
+      certificadoHoraImpresion: [''],
+      certificadoMatriculaInmobiliaria: [''],
+      certificadoPropietario: [''],
+      escrituraNumero: [''],
+      escrituraFecha: [''],
+      escrituraMatriculaInmobiliaria: [''],
+      escrituraPropietario: [''],
+      impuestoPeriodoFacturado: [''],
+      impuestoFecha: [''],
+      impuestoMatriculaFicha: [''],
+      impuestoCodigoCatastral: [''],
+      impuestoDireccion: [''],
+      impuestoPropietario: [''],
+      fachadaFrontal: [''],
+      fachadaPosterior: [''],
+      fachadaLateralIzquierda: [''],
+      fachadaLateralDerecha: [''],
 
       // Características Generales
       formaTerreno: ['', [Validators.required]],
@@ -285,7 +305,7 @@ export class CrearAvaluoComponent {
             fichaInmobiliaria: formValue.fichaInmobiliaria,
             codigoCatastral: formValue.codigoCatastral
           },
-          propietarios: [],
+          propietarios: formValue.propietarios || [],
           tipoInmueble: {
             tipo: formValue.tipoInmueble,
             regimen: formValue.regimen,
@@ -298,31 +318,31 @@ export class CrearAvaluoComponent {
             descripcion: formValue.descripcionDireccion
           },
           certificadoTradicionLibertad: {
-            pin: '',
-            fechaImpreso: '',
-            horaImpresion: '',
-            matriculaInmobiliaria: '',
-            propietario: ''
+            pin: formValue.certificadoPin || '',
+            fechaImpreso: formValue.certificadoFechaImpreso || '',
+            horaImpresion: formValue.certificadoHoraImpresion || '',
+            matriculaInmobiliaria: formValue.certificadoMatriculaInmobiliaria || '',
+            propietario: formValue.certificadoPropietario || ''
           },
           escrituraPublica: {
-            numero: '',
-            fecha: '',
-            matriculaInmobiliaria: '',
-            propietario: ''
+            numero: formValue.escrituraNumero || '',
+            fecha: formValue.escrituraFecha || '',
+            matriculaInmobiliaria: formValue.escrituraMatriculaInmobiliaria || '',
+            propietario: formValue.escrituraPropietario || ''
           },
           impuestoPredial: {
-            periodoFacturado: '',
-            fecha: '',
-            matriculaFicha: '',
-            codigoCatastral: '',
-            direccion: '',
-            propietario: ''
+            periodoFacturado: formValue.impuestoPeriodoFacturado || '',
+            fecha: formValue.impuestoFecha || '',
+            matriculaFicha: formValue.impuestoMatriculaFicha || '',
+            codigoCatastral: formValue.impuestoCodigoCatastral || '',
+            direccion: formValue.impuestoDireccion || '',
+            propietario: formValue.impuestoPropietario || ''
           },
           fachadas: {
-            frontal: '',
-            posterior: '',
-            lateralIzquierda: '',
-            lateralDerecha: ''
+            frontal: formValue.fachadaFrontal || '',
+            posterior: formValue.fachadaPosterior || '',
+            lateralIzquierda: formValue.fachadaLateralIzquierda || '',
+            lateralDerecha: formValue.fachadaLateralDerecha || ''
           }
         },
         caracteristicasGenerales: {

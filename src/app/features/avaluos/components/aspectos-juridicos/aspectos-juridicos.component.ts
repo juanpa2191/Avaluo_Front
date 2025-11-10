@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormGroup, FormArray, FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { InputComponent } from '../../../../shared/components/input/input.component';
@@ -27,6 +27,8 @@ export class AspectosJuridicosComponent {
   @Input() isEdit = false;
   @Output() previous = new EventEmitter<void>();
   @Output() next = new EventEmitter<void>();
+
+  constructor(private fb: FormBuilder) {}
 
   modoAdquisicionOptions: SelectOption[] = [
     { label: 'Compra', value: 'Compra' },
@@ -70,6 +72,31 @@ export class AspectosJuridicosComponent {
     { label: 'Mixta', value: 'Mixta' },
     { label: 'Rural', value: 'Rural' }
   ];
+
+  tipoIdentificacionOptions: SelectOption[] = [
+    { label: 'Cédula de Ciudadanía', value: 'CC' },
+    { label: 'Cédula de Extranjería', value: 'CE' },
+    { label: 'Pasaporte', value: 'PA' },
+    { label: 'NIT', value: 'NIT' },
+    { label: 'Registro Civil', value: 'RC' }
+  ];
+
+  get propietarios(): FormArray {
+    return this.form.get('propietarios') as FormArray;
+  }
+
+  agregarPropietario() {
+    const propietarioForm = this.fb.group({
+      propietario: ['', [Validators.required]],
+      tipoIdentificacion: ['', [Validators.required]],
+      numeroIdentificacion: ['', [Validators.required]]
+    });
+    this.propietarios.push(propietarioForm);
+  }
+
+  eliminarPropietario(index: number) {
+    this.propietarios.removeAt(index);
+  }
 
   getErrorMessage(fieldName: string): string {
     const field = this.form.get(fieldName);

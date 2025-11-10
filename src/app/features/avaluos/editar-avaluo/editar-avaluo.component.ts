@@ -122,6 +122,7 @@ export class EditarAvaluoComponent implements OnInit {
       responsabilidadesAvaluador: [[], [Validators.required, Validators.minLength(1)]],
 
       // Aspectos Jurídicos
+      propietarios: this.fb.array([]),
       escrituraPublica: ['', [Validators.required]],
       modoAdquisicion: ['', [Validators.required]],
       matriculaInmobiliaria: ['', [Validators.required]],
@@ -133,6 +134,25 @@ export class EditarAvaluoComponent implements OnInit {
       direccion: ['', [Validators.required]],
       destinacionEconomica: ['', [Validators.required]],
       descripcionDireccion: [''],
+      certificadoPin: [''],
+      certificadoFechaImpreso: [''],
+      certificadoHoraImpresion: [''],
+      certificadoMatriculaInmobiliaria: [''],
+      certificadoPropietario: [''],
+      escrituraNumero: [''],
+      escrituraFecha: [''],
+      escrituraMatriculaInmobiliaria: [''],
+      escrituraPropietario: [''],
+      impuestoPeriodoFacturado: [''],
+      impuestoFecha: [''],
+      impuestoMatriculaFicha: [''],
+      impuestoCodigoCatastral: [''],
+      impuestoDireccion: [''],
+      impuestoPropietario: [''],
+      fachadaFrontal: [''],
+      fachadaPosterior: [''],
+      fachadaLateralIzquierda: [''],
+      fachadaLateralDerecha: [''],
 
       // Características Generales
       formaTerreno: ['', [Validators.required]],
@@ -199,7 +219,8 @@ export class EditarAvaluoComponent implements OnInit {
       destinoAvaluo: avaluo.informacionGeneral.destinoAvaluo,
       responsabilidadesAvaluador: avaluo.informacionGeneral.responsabilidadesAvaluador,
 
-      // Aspectos Jurídicos
+      // Aspectos Jurídicos - Propietarios
+      propietarios: avaluo.aspectosJuridicos.propietarios || [],
       escrituraPublica: avaluo.aspectosJuridicos.inmuebleObjetoAvaluo.escrituraPublica,
       modoAdquisicion: avaluo.aspectosJuridicos.inmuebleObjetoAvaluo.modoAdquisicion,
       matriculaInmobiliaria: avaluo.aspectosJuridicos.inmuebleObjetoAvaluo.matriculaInmobiliaria,
@@ -211,6 +232,25 @@ export class EditarAvaluoComponent implements OnInit {
       direccion: avaluo.aspectosJuridicos.direccionYdestinacionEconomica?.direccion || '',
       destinacionEconomica: avaluo.aspectosJuridicos.direccionYdestinacionEconomica?.destinacionEconomica || '',
       descripcionDireccion: avaluo.aspectosJuridicos.direccionYdestinacionEconomica?.descripcion || '',
+      certificadoPin: avaluo.aspectosJuridicos.certificadoTradicionLibertad?.pin || '',
+      certificadoFechaImpreso: avaluo.aspectosJuridicos.certificadoTradicionLibertad?.fechaImpreso || '',
+      certificadoHoraImpresion: avaluo.aspectosJuridicos.certificadoTradicionLibertad?.horaImpresion || '',
+      certificadoMatriculaInmobiliaria: avaluo.aspectosJuridicos.certificadoTradicionLibertad?.matriculaInmobiliaria || '',
+      certificadoPropietario: avaluo.aspectosJuridicos.certificadoTradicionLibertad?.propietario || '',
+      escrituraNumero: avaluo.aspectosJuridicos.escrituraPublica?.numero || '',
+      escrituraFecha: avaluo.aspectosJuridicos.escrituraPublica?.fecha || '',
+      escrituraMatriculaInmobiliaria: avaluo.aspectosJuridicos.escrituraPublica?.matriculaInmobiliaria || '',
+      escrituraPropietario: avaluo.aspectosJuridicos.escrituraPublica?.propietario || '',
+      impuestoPeriodoFacturado: avaluo.aspectosJuridicos.impuestoPredial?.periodoFacturado || '',
+      impuestoFecha: avaluo.aspectosJuridicos.impuestoPredial?.fecha || '',
+      impuestoMatriculaFicha: avaluo.aspectosJuridicos.impuestoPredial?.matriculaFicha || '',
+      impuestoCodigoCatastral: avaluo.aspectosJuridicos.impuestoPredial?.codigoCatastral || '',
+      impuestoDireccion: avaluo.aspectosJuridicos.impuestoPredial?.direccion || '',
+      impuestoPropietario: avaluo.aspectosJuridicos.impuestoPredial?.propietario || '',
+      fachadaFrontal: avaluo.aspectosJuridicos.fachadas?.frontal || '',
+      fachadaPosterior: avaluo.aspectosJuridicos.fachadas?.posterior || '',
+      fachadaLateralIzquierda: avaluo.aspectosJuridicos.fachadas?.lateralIzquierda || '',
+      fachadaLateralDerecha: avaluo.aspectosJuridicos.fachadas?.lateralDerecha || '',
 
       // Características Generales
       formaTerreno: avaluo.caracteristicasGenerales.formaGeometricaYdimensionDelPredio.formaTerreno,
@@ -302,7 +342,7 @@ export class EditarAvaluoComponent implements OnInit {
             fichaInmobiliaria: formValue.fichaInmobiliaria,
             codigoCatastral: formValue.codigoCatastral
           },
-          propietarios: this.removeIds(this.avaluo?.aspectosJuridicos.propietarios) || [],
+          propietarios: formValue.propietarios || [],
           tipoInmueble: {
             tipo: formValue.tipoInmueble,
             regimen: formValue.regimen,
@@ -314,32 +354,32 @@ export class EditarAvaluoComponent implements OnInit {
             imagen: this.avaluo?.aspectosJuridicos.direccionYdestinacionEconomica?.imagen || '',
             descripcion: formValue.descripcionDireccion
           },
-          certificadoTradicionLibertad: this.removeIds(this.avaluo?.aspectosJuridicos.certificadoTradicionLibertad) || {
-            pin: '',
-            fechaImpreso: '',
-            horaImpresion: '',
-            matriculaInmobiliaria: '',
-            propietario: ''
+          certificadoTradicionLibertad: {
+            pin: formValue.certificadoPin || '',
+            fechaImpreso: formValue.certificadoFechaImpreso || '',
+            horaImpresion: formValue.certificadoHoraImpresion || '',
+            matriculaInmobiliaria: formValue.certificadoMatriculaInmobiliaria || '',
+            propietario: formValue.certificadoPropietario || ''
           },
-          escrituraPublica: this.removeIds(this.avaluo?.aspectosJuridicos.escrituraPublica) || {
-            numero: '',
-            fecha: '',
-            matriculaInmobiliaria: '',
-            propietario: ''
+          escrituraPublica: {
+            numero: formValue.escrituraNumero || '',
+            fecha: formValue.escrituraFecha || '',
+            matriculaInmobiliaria: formValue.escrituraMatriculaInmobiliaria || '',
+            propietario: formValue.escrituraPropietario || ''
           },
-          impuestoPredial: this.removeIds(this.avaluo?.aspectosJuridicos.impuestoPredial) || {
-            periodoFacturado: '',
-            fecha: '',
-            matriculaFicha: '',
-            codigoCatastral: '',
-            direccion: '',
-            propietario: ''
+          impuestoPredial: {
+            periodoFacturado: formValue.impuestoPeriodoFacturado || '',
+            fecha: formValue.impuestoFecha || '',
+            matriculaFicha: formValue.impuestoMatriculaFicha || '',
+            codigoCatastral: formValue.impuestoCodigoCatastral || '',
+            direccion: formValue.impuestoDireccion || '',
+            propietario: formValue.impuestoPropietario || ''
           },
-          fachadas: this.removeIds(this.avaluo?.aspectosJuridicos.fachadas) || {
-            frontal: '',
-            posterior: '',
-            lateralIzquierda: '',
-            lateralDerecha: ''
+          fachadas: {
+            frontal: formValue.fachadaFrontal || '',
+            posterior: formValue.fachadaPosterior || '',
+            lateralIzquierda: formValue.fachadaLateralIzquierda || '',
+            lateralDerecha: formValue.fachadaLateralDerecha || ''
           }
         },
         caracteristicasGenerales: {
