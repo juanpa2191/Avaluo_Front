@@ -163,10 +163,35 @@ export class EditarAvaluoComponent implements OnInit {
       observaciones: [''],
       estratoSocioeconomico: ['', [Validators.required]],
       entorno: ['', [Validators.required]],
+      viasPrincipalesDescripcion: [''],
+      viasPrincipalesAccesoTipo: [''],
+      viasPrincipalesAccesoDistancia: [''],
+      transportePublicoDescripcion: [''],
+      transportePublicoBus: [''],
+      transportePublicoMetro: [''],
+      transportePublicoBicicleta: [''],
+      transportePublicoFrecuencia: [''],
+      serviciosPublicos: [[]],
+      infraestructuraEcologicaDescripcion: [''],
+      infraestructuraEcologicaCoberturaVegetal: [''],
+      infraestructuraEcologicaFauna: [''],
+      infraestructuraEcologicaHidrologia: [''],
+      infraestructuraEcologicaUsoSuelo: [''],
+      infraestructuraEcologicaConservacion: [''],
+      viaAccesoDescripcion: [''],
+      viaAccesoPrincipal: [''],
+      viaAccesoSecundaria: [''],
+      viaAccesoTipoPavimento: [''],
+      viaAccesoEstadoPavimento: [''],
+      viaAccesoAndenes: [''],
+      viaAccesoEstadoAndenes: [''],
+      viaAccesoAlumbradoPublico: [''],
+      viaAccesoEstadoAlumbrado: [''],
       perspectivasValoracion: [''],
       usoPrincipal: ['', [Validators.required]],
       usoComplementario: [''],
       usoCondicionado: [''],
+      usoProhibido: [''],
 
       // Inspección Física
       esquemaNormativo: ['', [Validators.required]],
@@ -261,10 +286,35 @@ export class EditarAvaluoComponent implements OnInit {
       observaciones: avaluo.caracteristicasGenerales.observaciones,
       estratoSocioeconomico: avaluo.caracteristicasGenerales.estratoSocioeconomico?.descripcion || '',
       entorno: avaluo.caracteristicasGenerales.entorno || '',
+      viasPrincipalesDescripcion: avaluo.caracteristicasGenerales.viasPrincipales?.descripcion || '',
+      viasPrincipalesAccesoTipo: avaluo.caracteristicasGenerales.viasPrincipales?.acceso?.tipo || '',
+      viasPrincipalesAccesoDistancia: avaluo.caracteristicasGenerales.viasPrincipales?.acceso?.distancia || '',
+      transportePublicoDescripcion: avaluo.caracteristicasGenerales.transportePublico?.descripcion || '',
+      transportePublicoBus: avaluo.caracteristicasGenerales.transportePublico?.tiposTransporte?.bus || '',
+      transportePublicoMetro: avaluo.caracteristicasGenerales.transportePublico?.tiposTransporte?.metro || '',
+      transportePublicoBicicleta: avaluo.caracteristicasGenerales.transportePublico?.tiposTransporte?.bicicleta || '',
+      transportePublicoFrecuencia: avaluo.caracteristicasGenerales.transportePublico?.frecuenciaOperacion || '',
+      serviciosPublicos: avaluo.caracteristicasGenerales.serviciosPublicos || [],
+      infraestructuraEcologicaDescripcion: avaluo.caracteristicasGenerales.infraestructuraEcologica?.descripcion || '',
+      infraestructuraEcologicaCoberturaVegetal: avaluo.caracteristicasGenerales.infraestructuraEcologica?.coberturaVegetal || '',
+      infraestructuraEcologicaFauna: avaluo.caracteristicasGenerales.infraestructuraEcologica?.fauna || '',
+      infraestructuraEcologicaHidrologia: avaluo.caracteristicasGenerales.infraestructuraEcologica?.hidrologia || '',
+      infraestructuraEcologicaUsoSuelo: avaluo.caracteristicasGenerales.infraestructuraEcologica?.usoSuelo || '',
+      infraestructuraEcologicaConservacion: avaluo.caracteristicasGenerales.infraestructuraEcologica?.conservacionManejo || '',
+      viaAccesoDescripcion: avaluo.caracteristicasGenerales.viaAccesoPredio?.descripcion || '',
+      viaAccesoPrincipal: avaluo.caracteristicasGenerales.viaAccesoPredio?.observaciones?.viaAccesoPrincipal || '',
+      viaAccesoSecundaria: avaluo.caracteristicasGenerales.viaAccesoPredio?.observaciones?.viaSecundaria || '',
+      viaAccesoTipoPavimento: avaluo.caracteristicasGenerales.viaAccesoPredio?.observaciones?.tipoPavimento || '',
+      viaAccesoEstadoPavimento: avaluo.caracteristicasGenerales.viaAccesoPredio?.observaciones?.estadoPavimento || '',
+      viaAccesoAndenes: avaluo.caracteristicasGenerales.viaAccesoPredio?.observaciones?.andenes || '',
+      viaAccesoEstadoAndenes: avaluo.caracteristicasGenerales.viaAccesoPredio?.observaciones?.estadoAndenes || '',
+      viaAccesoAlumbradoPublico: avaluo.caracteristicasGenerales.viaAccesoPredio?.observaciones?.alumbradoPublico || '',
+      viaAccesoEstadoAlumbrado: avaluo.caracteristicasGenerales.viaAccesoPredio?.observaciones?.estadoAlumbradoPublico || '',
       perspectivasValoracion: avaluo.caracteristicasGenerales.perspectivasValoracion || '',
       usoPrincipal: avaluo.caracteristicasGenerales.actividadesSector?.usoPrincipal || '',
       usoComplementario: avaluo.caracteristicasGenerales.actividadesSector?.usoComplementario || '',
       usoCondicionado: avaluo.caracteristicasGenerales.actividadesSector?.usoCondicionado || '',
+      usoProhibido: avaluo.caracteristicasGenerales.actividadesSector?.usoProhibido || '',
 
       // Inspección Física
       esquemaNormativo: avaluo.inspeccionFisica.esquemaNormativo,
@@ -396,55 +446,55 @@ export class EditarAvaluoComponent implements OnInit {
             tablaEstratificacionNacional: this.removeIds(this.avaluo?.caracteristicasGenerales.estratoSocioeconomico?.tablaEstratificacionNacional) || []
           },
           entorno: formValue.entorno,
-          viasPrincipales: this.removeIds(this.avaluo?.caracteristicasGenerales.viasPrincipales) || {
-            descripcion: '',
+          viasPrincipales: {
+            descripcion: formValue.viasPrincipalesDescripcion || '',
             acceso: {
-              tipo: '',
-              distancia: ''
+              tipo: formValue.viasPrincipalesAccesoTipo || '',
+              distancia: formValue.viasPrincipalesAccesoDistancia || ''
             },
-            imagen: [],
-            vias: []
+            imagen: this.removeIds(this.avaluo?.caracteristicasGenerales.viasPrincipales?.imagen) || [],
+            vias: this.removeIds(this.avaluo?.caracteristicasGenerales.viasPrincipales?.vias) || []
           },
-          transportePublico: this.removeIds(this.avaluo?.caracteristicasGenerales.transportePublico) || {
-            descripcion: '',
+          transportePublico: {
+            descripcion: formValue.transportePublicoDescripcion || '',
             tiposTransporte: {
-              bus: '',
-              metro: '',
-              bicicleta: ''
+              bus: formValue.transportePublicoBus || '',
+              metro: formValue.transportePublicoMetro || '',
+              bicicleta: formValue.transportePublicoBicicleta || ''
             },
-            frecuenciaOperacion: '',
-            imagenes: []
+            frecuenciaOperacion: formValue.transportePublicoFrecuencia || '',
+            imagenes: this.removeIds(this.avaluo?.caracteristicasGenerales.transportePublico?.imagenes) || []
           },
-          serviciosPublicos: this.removeIds(this.avaluo?.caracteristicasGenerales.serviciosPublicos) || [],
-          infraestructuraEcologica: this.removeIds(this.avaluo?.caracteristicasGenerales.infraestructuraEcologica) || {
-            descripcion: '',
-            coberturaVegetal: '',
-            fauna: '',
-            hidrologia: '',
-            usoSuelo: '',
-            conservacionManejo: '',
-            imagenes: []
+          serviciosPublicos: formValue.serviciosPublicos || [],
+          infraestructuraEcologica: {
+            descripcion: formValue.infraestructuraEcologicaDescripcion || '',
+            coberturaVegetal: formValue.infraestructuraEcologicaCoberturaVegetal || '',
+            fauna: formValue.infraestructuraEcologicaFauna || '',
+            hidrologia: formValue.infraestructuraEcologicaHidrologia || '',
+            usoSuelo: formValue.infraestructuraEcologicaUsoSuelo || '',
+            conservacionManejo: formValue.infraestructuraEcologicaConservacion || '',
+            imagenes: this.removeIds(this.avaluo?.caracteristicasGenerales.infraestructuraEcologica?.imagenes) || []
           },
-          viaAccesoPredio: this.removeIds(this.avaluo?.caracteristicasGenerales.viaAccesoPredio) || {
-            descripcion: '',
+          viaAccesoPredio: {
+            descripcion: formValue.viaAccesoDescripcion || '',
             observaciones: {
-              viaAccesoPrincipal: '',
-              viaSecundaria: '',
-              tipoPavimento: '',
-              estadoPavimento: '',
-              andenes: '',
-              estadoAndenes: '',
-              alumbradoPublico: '',
-              estadoAlumbradoPublico: ''
+              viaAccesoPrincipal: formValue.viaAccesoPrincipal || '',
+              viaSecundaria: formValue.viaAccesoSecundaria || '',
+              tipoPavimento: formValue.viaAccesoTipoPavimento || '',
+              estadoPavimento: formValue.viaAccesoEstadoPavimento || '',
+              andenes: formValue.viaAccesoAndenes || '',
+              estadoAndenes: formValue.viaAccesoEstadoAndenes || '',
+              alumbradoPublico: formValue.viaAccesoAlumbradoPublico || '',
+              estadoAlumbradoPublico: formValue.viaAccesoEstadoAlumbrado || ''
             },
-            imagenes: []
+            imagenes: this.removeIds(this.avaluo?.caracteristicasGenerales.viaAccesoPredio?.imagenes) || []
           },
           perspectivasValoracion: formValue.perspectivasValoracion,
           actividadesSector: {
             usoPrincipal: formValue.usoPrincipal,
             usoComplementario: formValue.usoComplementario,
             usoCondicionado: formValue.usoCondicionado,
-            usoProhibido: this.avaluo?.caracteristicasGenerales.actividadesSector?.usoProhibido || ''
+            usoProhibido: formValue.usoProhibido || ''
           }
         },
         inspeccionFisica: {

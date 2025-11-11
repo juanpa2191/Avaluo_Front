@@ -80,6 +80,86 @@ export class CaracteristicasGeneralesComponent {
     { label: 'Ninguno', value: 'Ninguno' }
   ];
 
+  tipoAccesoOptions: SelectOption[] = [
+    { label: 'Directo', value: 'Directo' },
+    { label: 'Indirecto', value: 'Indirecto' },
+    { label: 'Restringido', value: 'Restringido' },
+    { label: 'Privado', value: 'Privado' }
+  ];
+
+  disponibilidadOptions: SelectOption[] = [
+    { label: 'Disponible', value: 'Disponible' },
+    { label: 'No disponible', value: 'No disponible' },
+    { label: 'Limitado', value: 'Limitado' }
+  ];
+
+  tipoPavimentoOptions: SelectOption[] = [
+    { label: 'Asfalto', value: 'Asfalto' },
+    { label: 'Concreto', value: 'Concreto' },
+    { label: 'Piedra', value: 'Piedra' },
+    { label: 'Tierra', value: 'Tierra' },
+    { label: 'Sin pavimentar', value: 'Sin pavimentar' }
+  ];
+
+  estadoPavimentoOptions: SelectOption[] = [
+    { label: 'Excelente', value: 'Excelente' },
+    { label: 'Bueno', value: 'Bueno' },
+    { label: 'Regular', value: 'Regular' },
+    { label: 'Malo', value: 'Malo' },
+    { label: 'Muy malo', value: 'Muy malo' }
+  ];
+
+  estadoAndenesOptions: SelectOption[] = [
+    { label: 'Excelente', value: 'Excelente' },
+    { label: 'Bueno', value: 'Bueno' },
+    { label: 'Regular', value: 'Regular' },
+    { label: 'Malo', value: 'Malo' },
+    { label: 'Ausente', value: 'Ausente' }
+  ];
+
+  estadoAlumbradoOptions: SelectOption[] = [
+    { label: 'Excelente', value: 'Excelente' },
+    { label: 'Bueno', value: 'Bueno' },
+    { label: 'Regular', value: 'Regular' },
+    { label: 'Malo', value: 'Malo' },
+    { label: 'Ausente', value: 'Ausente' }
+  ];
+
+  serviciosPublicosList = [
+    { nombre: 'acueducto', disponible: false },
+    { nombre: 'alcantarillado', disponible: false },
+    { nombre: 'energia electrica', disponible: false },
+    { nombre: 'red telefonica', disponible: false },
+    { nombre: 'gas natural', disponible: false }
+  ];
+
+  isServicioSelected(nombre: string): boolean {
+    const serviciosControl = this.form.get('serviciosPublicos');
+    if (serviciosControl && Array.isArray(serviciosControl.value)) {
+      return serviciosControl.value.some((servicio: any) => servicio.nombre === nombre && servicio.disponible);
+    }
+    return false;
+  }
+
+  toggleServicio(nombre: string, event: Event) {
+    const target = event.target as HTMLInputElement;
+    const checked = target.checked;
+
+    const serviciosControl = this.form.get('serviciosPublicos');
+    if (serviciosControl && Array.isArray(serviciosControl.value)) {
+      const servicios = [...serviciosControl.value];
+      const index = servicios.findIndex((servicio: any) => servicio.nombre === nombre);
+
+      if (index !== -1) {
+        servicios[index] = { ...servicios[index], disponible: checked };
+      } else {
+        servicios.push({ nombre, disponible: checked });
+      }
+
+      serviciosControl.setValue(servicios);
+    }
+  }
+
   getErrorMessage(fieldName: string): string {
     const field = this.form.get(fieldName);
     if (field?.hasError('required')) {

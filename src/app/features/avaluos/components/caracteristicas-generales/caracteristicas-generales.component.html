@@ -54,6 +54,16 @@
 
         <div class="full-width">
           <app-textarea
+            label="Entorno"
+            formControlName="entorno"
+            placeholder="Describa el entorno del inmueble (urbano, suburbano, rural, etc.)"
+            [rows]="3"
+            [error]="getErrorMessage('entorno')"
+          ></app-textarea>
+        </div>
+
+        <div class="full-width">
+          <app-textarea
             label="Observaciones"
             formControlName="observaciones"
             placeholder="Observaciones adicionales sobre el sector"
@@ -64,9 +74,9 @@
       </div>
     </div>
 
-    <!-- Estratificación y Entorno -->
+    <!-- Estratificación Socioeconómica -->
     <div class="subsection">
-      <h4>Estratificación Socioeconómica y Entorno</h4>
+      <h4>Estratificación Socioeconómica</h4>
       <div class="subsection-grid">
         <app-select
           label="Estrato Socioeconómico"
@@ -74,14 +84,6 @@
           placeholder="Seleccionar estrato"
           [options]="estratoOptions"
           [error]="getErrorMessage('estratoSocioeconomico')"
-        ></app-select>
-
-        <app-select
-          label="Entorno"
-          formControlName="entorno"
-          placeholder="Seleccionar entorno"
-          [options]="entornoOptions"
-          [error]="getErrorMessage('entorno')"
         ></app-select>
 
         <div class="full-width">
@@ -96,33 +98,279 @@
       </div>
     </div>
 
+    <!-- Vías Principales -->
+    <div class="subsection">
+      <h4>Vías Principales</h4>
+      <div class="subsection-grid">
+        <div class="full-width">
+          <app-textarea
+            label="Descripción de Vías Principales"
+            formControlName="viasPrincipalesDescripcion"
+            placeholder="Describa las vías principales que dan acceso al sector"
+            [rows]="3"
+            [error]="getErrorMessage('viasPrincipalesDescripcion')"
+          ></app-textarea>
+        </div>
+
+        <app-select
+          label="Tipo de Acceso"
+          formControlName="viasPrincipalesAccesoTipo"
+          placeholder="Seleccionar tipo de acceso"
+          [options]="tipoAccesoOptions"
+          [error]="getErrorMessage('viasPrincipalesAccesoTipo')"
+        ></app-select>
+
+        <app-input
+          label="Distancia de Acceso (m)"
+          type="number"
+          formControlName="viasPrincipalesAccesoDistancia"
+          placeholder="0"
+          [error]="getErrorMessage('viasPrincipalesAccesoDistancia')"
+        ></app-input>
+      </div>
+    </div>
+
+    <!-- Transporte Público -->
+    <div class="subsection">
+      <h4>Transporte Público</h4>
+      <div class="subsection-grid">
+        <div class="full-width">
+          <app-textarea
+            label="Descripción del Transporte Público"
+            formControlName="transportePublicoDescripcion"
+            placeholder="Describa la disponibilidad y calidad del transporte público"
+            [rows]="3"
+            [error]="getErrorMessage('transportePublicoDescripcion')"
+          ></app-textarea>
+        </div>
+
+        <app-select
+          label="Tipo de Transporte - Bus"
+          formControlName="transportePublicoBus"
+          placeholder="Disponibilidad de buses"
+          [options]="disponibilidadOptions"
+          [error]="getErrorMessage('transportePublicoBus')"
+        ></app-select>
+
+        <app-select
+          label="Tipo de Transporte - Metro"
+          formControlName="transportePublicoMetro"
+          placeholder="Disponibilidad de metro"
+          [options]="disponibilidadOptions"
+          [error]="getErrorMessage('transportePublicoMetro')"
+        ></app-select>
+
+        <app-select
+          label="Tipo de Transporte - Bicicleta"
+          formControlName="transportePublicoBicicleta"
+          placeholder="Disponibilidad de ciclorutas"
+          [options]="disponibilidadOptions"
+          [error]="getErrorMessage('transportePublicoBicicleta')"
+        ></app-select>
+
+        <app-input
+          label="Frecuencia de Operación"
+          formControlName="transportePublicoFrecuencia"
+          placeholder="Cada cuánto tiempo pasa el transporte"
+          [error]="getErrorMessage('transportePublicoFrecuencia')"
+        ></app-input>
+      </div>
+    </div>
+
+    <!-- Servicios Públicos -->
+    <div class="subsection">
+      <h4>Servicios Públicos</h4>
+      <div class="servicios-grid">
+        <div *ngFor="let servicio of serviciosPublicosList" class="servicio-item">
+          <label class="checkbox-label">
+            <input
+              type="checkbox"
+              [checked]="isServicioSelected(servicio.nombre)"
+              (change)="toggleServicio(servicio.nombre, $event)"
+            />
+            <span class="checkmark"></span>
+            {{ servicio.nombre | titlecase }}
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Infraestructura Ecológica -->
+    <div class="subsection">
+      <h4>Infraestructura Ecológica</h4>
+      <div class="subsection-grid">
+        <div class="full-width">
+          <app-textarea
+            label="Descripción de Infraestructura Ecológica"
+            formControlName="infraestructuraEcologicaDescripcion"
+            placeholder="Describa la infraestructura ecológica del sector"
+            [rows]="3"
+            [error]="getErrorMessage('infraestructuraEcologicaDescripcion')"
+          ></app-textarea>
+        </div>
+
+        <app-input
+          label="Cobertura Vegetal"
+          formControlName="infraestructuraEcologicaCoberturaVegetal"
+          placeholder="Tipo y porcentaje de cobertura vegetal"
+          [error]="getErrorMessage('infraestructuraEcologicaCoberturaVegetal')"
+        ></app-input>
+
+        <app-input
+          label="Fauna"
+          formControlName="infraestructuraEcologicaFauna"
+          placeholder="Especies de fauna presentes"
+          [error]="getErrorMessage('infraestructuraEcologicaFauna')"
+        ></app-input>
+
+        <app-input
+          label="Hidrología"
+          formControlName="infraestructuraEcologicaHidrologia"
+          placeholder="Cuerpos de agua y drenaje"
+          [error]="getErrorMessage('infraestructuraEcologicaHidrologia')"
+        ></app-input>
+
+        <app-input
+          label="Uso del Suelo"
+          formControlName="infraestructuraEcologicaUsoSuelo"
+          placeholder="Clasificación del uso del suelo"
+          [error]="getErrorMessage('infraestructuraEcologicaUsoSuelo')"
+        ></app-input>
+
+        <app-input
+          label="Conservación y Manejo"
+          formControlName="infraestructuraEcologicaConservacion"
+          placeholder="Medidas de conservación implementadas"
+          [error]="getErrorMessage('infraestructuraEcologicaConservacion')"
+        ></app-input>
+      </div>
+    </div>
+
+    <!-- Vía de Acceso al Predio -->
+    <div class="subsection">
+      <h4>Vía de Acceso al Predio</h4>
+      <div class="subsection-grid">
+        <div class="full-width">
+          <app-textarea
+            label="Descripción de la Vía de Acceso"
+            formControlName="viaAccesoDescripcion"
+            placeholder="Describa la vía de acceso principal al predio"
+            [rows]="3"
+            [error]="getErrorMessage('viaAccesoDescripcion')"
+          ></app-textarea>
+        </div>
+
+        <app-input
+          label="Vía de Acceso Principal"
+          formControlName="viaAccesoPrincipal"
+          placeholder="Nombre de la vía principal"
+          [error]="getErrorMessage('viaAccesoPrincipal')"
+        ></app-input>
+
+        <app-input
+          label="Vía Secundaria"
+          formControlName="viaAccesoSecundaria"
+          placeholder="Nombre de la vía secundaria (opcional)"
+          [error]="getErrorMessage('viaAccesoSecundaria')"
+        ></app-input>
+
+        <app-input
+          label="Tipo de Pavimento"
+          formControlName="viaAccesoTipoPavimento"
+          placeholder="Describa el tipo de pavimento"
+          [error]="getErrorMessage('viaAccesoTipoPavimento')"
+        ></app-input>
+
+        <app-input
+          label="Estado del Pavimento"
+          formControlName="viaAccesoEstadoPavimento"
+          placeholder="Describa el estado del pavimento"
+          [error]="getErrorMessage('viaAccesoEstadoPavimento')"
+        ></app-input>
+
+        <app-input
+          label="Andenes"
+          formControlName="viaAccesoAndenes"
+          placeholder="Describa la disponibilidad y estado de andenes"
+          [error]="getErrorMessage('viaAccesoAndenes')"
+        ></app-input>
+
+        <app-input
+          label="Estado de los Andenes"
+          formControlName="viaAccesoEstadoAndenes"
+          placeholder="Describa detalladamente el estado de los andenes"
+          [error]="getErrorMessage('viaAccesoEstadoAndenes')"
+        ></app-input>
+
+        <app-input
+          label="Alumbrado Público"
+          formControlName="viaAccesoAlumbradoPublico"
+          placeholder="Describa la disponibilidad de alumbrado público"
+          [error]="getErrorMessage('viaAccesoAlumbradoPublico')"
+        ></app-input>
+
+        <app-input
+          label="Estado del Alumbrado Público"
+          formControlName="viaAccesoEstadoAlumbrado"
+          placeholder="Describa el estado del alumbrado público"
+          [error]="getErrorMessage('viaAccesoEstadoAlumbrado')"
+        ></app-input>
+
+        <div class="full-width">
+          <app-textarea
+            label="Perspectivas de Valoración"
+            formControlName="perspectivasValoracion"
+            placeholder="Análisis de las perspectivas de valoración del inmueble considerando el acceso y entorno"
+            [rows]="4"
+            [error]="getErrorMessage('perspectivasValoracion')"
+          ></app-textarea>
+        </div>
+      </div>
+    </div>
+
     <!-- Actividades del Sector -->
     <div class="subsection">
       <h4>Actividades del Sector</h4>
       <div class="subsection-grid">
-        <app-select
-          label="Uso Principal"
-          formControlName="usoPrincipal"
-          placeholder="Seleccionar uso principal"
-          [options]="usoPrincipalOptions"
-          [error]="getErrorMessage('usoPrincipal')"
-        ></app-select>
+        <div class="full-width">
+          <app-textarea
+            label="Uso Principal"
+            formControlName="usoPrincipal"
+            placeholder="Describa el uso principal del sector"
+            [rows]="2"
+            [error]="getErrorMessage('usoPrincipal')"
+          ></app-textarea>
+        </div>
 
-        <app-select
-          label="Uso Complementario"
-          formControlName="usoComplementario"
-          placeholder="Seleccionar uso complementario"
-          [options]="usoComplementarioOptions"
-          [error]="getErrorMessage('usoComplementario')"
-        ></app-select>
+        <div class="full-width">
+          <app-textarea
+            label="Uso Complementario"
+            formControlName="usoComplementario"
+            placeholder="Describa los usos complementarios permitidos"
+            [rows]="2"
+            [error]="getErrorMessage('usoComplementario')"
+          ></app-textarea>
+        </div>
 
-        <app-select
-          label="Uso Condicionado"
-          formControlName="usoCondicionado"
-          placeholder="Seleccionar uso condicionado"
-          [options]="usoCondicionadoOptions"
-          [error]="getErrorMessage('usoCondicionado')"
-        ></app-select>
+        <div class="full-width">
+          <app-textarea
+            label="Uso Condicionado"
+            formControlName="usoCondicionado"
+            placeholder="Describa los usos condicionados"
+            [rows]="2"
+            [error]="getErrorMessage('usoCondicionado')"
+          ></app-textarea>
+        </div>
+
+        <div class="full-width">
+          <app-textarea
+            label="Uso Prohibido"
+            formControlName="usoProhibido"
+            placeholder="Describa los usos prohibidos en el sector"
+            [rows]="2"
+            [error]="getErrorMessage('usoProhibido')"
+          ></app-textarea>
+        </div>
       </div>
     </div>
   </div>

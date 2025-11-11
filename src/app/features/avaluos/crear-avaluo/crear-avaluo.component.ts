@@ -238,10 +238,35 @@ export class CrearAvaluoComponent {
       observaciones: [''],
       estratoSocioeconomico: ['', [Validators.required]],
       entorno: ['', [Validators.required]],
+      viasPrincipalesDescripcion: [''],
+      viasPrincipalesAccesoTipo: [''],
+      viasPrincipalesAccesoDistancia: [''],
+      transportePublicoDescripcion: [''],
+      transportePublicoBus: [''],
+      transportePublicoMetro: [''],
+      transportePublicoBicicleta: [''],
+      transportePublicoFrecuencia: [''],
+      serviciosPublicos: [[]],
+      infraestructuraEcologicaDescripcion: [''],
+      infraestructuraEcologicaCoberturaVegetal: [''],
+      infraestructuraEcologicaFauna: [''],
+      infraestructuraEcologicaHidrologia: [''],
+      infraestructuraEcologicaUsoSuelo: [''],
+      infraestructuraEcologicaConservacion: [''],
+      viaAccesoDescripcion: [''],
+      viaAccesoPrincipal: [''],
+      viaAccesoSecundaria: [''],
+      viaAccesoTipoPavimento: [''],
+      viaAccesoEstadoPavimento: [''],
+      viaAccesoAndenes: [''],
+      viaAccesoEstadoAndenes: [''],
+      viaAccesoAlumbradoPublico: [''],
+      viaAccesoEstadoAlumbrado: [''],
       perspectivasValoracion: [''],
       usoPrincipal: ['', [Validators.required]],
       usoComplementario: ['', [Validators.required]],
       usoCondicionado: ['', [Validators.required]],
+      usoProhibido: [''],
 
       // Inspección Física
       esquemaNormativo: ['', [Validators.required]],
@@ -360,45 +385,45 @@ export class CrearAvaluoComponent {
           },
           entorno: formValue.entorno,
           viasPrincipales: {
-            descripcion: '',
+            descripcion: formValue.viasPrincipalesDescripcion || '',
             acceso: {
-              tipo: '',
-              distancia: ''
+              tipo: formValue.viasPrincipalesAccesoTipo || '',
+              distancia: formValue.viasPrincipalesAccesoDistancia || ''
             },
             imagen: [],
             vias: []
           },
           transportePublico: {
-            descripcion: '',
+            descripcion: formValue.transportePublicoDescripcion || '',
             tiposTransporte: {
-              bus: '',
-              metro: '',
-              bicicleta: ''
+              bus: formValue.transportePublicoBus || '',
+              metro: formValue.transportePublicoMetro || '',
+              bicicleta: formValue.transportePublicoBicicleta || ''
             },
-            frecuenciaOperacion: '',
+            frecuenciaOperacion: formValue.transportePublicoFrecuencia || '',
             imagenes: []
           },
-          serviciosPublicos: [],
+          serviciosPublicos: formValue.serviciosPublicos || [],
           infraestructuraEcologica: {
-            descripcion: '',
-            coberturaVegetal: '',
-            fauna: '',
-            hidrologia: '',
-            usoSuelo: '',
-            conservacionManejo: '',
+            descripcion: formValue.infraestructuraEcologicaDescripcion || '',
+            coberturaVegetal: formValue.infraestructuraEcologicaCoberturaVegetal || '',
+            fauna: formValue.infraestructuraEcologicaFauna || '',
+            hidrologia: formValue.infraestructuraEcologicaHidrologia || '',
+            usoSuelo: formValue.infraestructuraEcologicaUsoSuelo || '',
+            conservacionManejo: formValue.infraestructuraEcologicaConservacion || '',
             imagenes: []
           },
           viaAccesoPredio: {
-            descripcion: '',
+            descripcion: formValue.viaAccesoDescripcion || '',
             observaciones: {
-              viaAccesoPrincipal: '',
-              viaSecundaria: '',
-              tipoPavimento: '',
-              estadoPavimento: '',
-              andenes: '',
-              estadoAndenes: '',
-              alumbradoPublico: '',
-              estadoAlumbradoPublico: ''
+              viaAccesoPrincipal: formValue.viaAccesoPrincipal || '',
+              viaSecundaria: formValue.viaAccesoSecundaria || '',
+              tipoPavimento: formValue.viaAccesoTipoPavimento || '',
+              estadoPavimento: formValue.viaAccesoEstadoPavimento || '',
+              andenes: formValue.viaAccesoAndenes || '',
+              estadoAndenes: formValue.viaAccesoEstadoAndenes || '',
+              alumbradoPublico: formValue.viaAccesoAlumbradoPublico || '',
+              estadoAlumbradoPublico: formValue.viaAccesoEstadoAlumbrado || ''
             },
             imagenes: []
           },
@@ -407,7 +432,7 @@ export class CrearAvaluoComponent {
             usoPrincipal: formValue.usoPrincipal,
             usoComplementario: formValue.usoComplementario,
             usoCondicionado: formValue.usoCondicionado,
-            usoProhibido: ''
+            usoProhibido: formValue.usoProhibido || ''
           }
         },
         inspeccionFisica: {
